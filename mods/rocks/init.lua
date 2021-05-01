@@ -327,8 +327,9 @@ end --End register_rockset function
 
 --------------Default Rocks Registration -------
 
-register_rockset("stone", "default:cobble", "default:stone", "stone.png")
-register_rockset("desert_sand", "default:desert_sand", "default:desert_sandstone", "desert_sand.png")
-register_rockset("desert_stone", "default:desert_stone", "default:desert_cobble", "desert_stone.png")
-register_rockset("sand", "default:sand", "default:sandstone", "sand.png")
-register_rockset("silver_sand", "default:silver_sand", "default:silver_sandstone", "silver_sand.png")
+register_rockset("stone", "mars:cobble", "mars:stone", "mars_stone.png")
+register_rockset("sand", "mars:sand", "mars:sand", "mars_sand.png")
+
+
+
+
