@@ -120,31 +120,100 @@ minetest.register_node("mars:glass", {
 })
 
 
---minetest.register_biome({
-    --name = "mars_stone",
-    --node_top = "mars:stone",
-    --depth_top = 1,
-    --node_filler = "default:stone",
-    --depth_filler = 3,
-    --y_max = 1000,
-    --y_min = -3,
-    --heat_point = 50,
-    --humidity_point = 50,
---})
+minetest.register_node("mars:air", {
+    description = "Mars Air (how are you seeing this?!)",
+    drawtype = "airlike",
+    paramtype = "light",
+    sunlight_propagates = true,
+    walkable     = false, -- Would make the player collide with the air node
+    pointable    = false, -- You can't select the node
+    diggable     = false, -- You can't dig the node
+    buildable_to = true,  -- Nodes can be replace this node.
+                          -- (you can place a node and remove the air node
+                          -- that used to be there)
+    air_equivalent = true,
+    drop = "",
+    groups = {not_in_creative_inventory=1}
+})
+
 
 minetest.register_biome({
-    name = "mars_sand",
-    node_top = "mars:sand",
+    name = "mars_surface",
+    node_top = "mars:stone",
     depth_top = 1,
-    node_filler = "default:stone",
+    -- Node forming surface layer of biome and thickness of this layer
+    node_filler = "mars:stone",
     depth_filler = 3,
+    -- Node forming lower layer of biome and thickness of this layer
+    node_stone = "mars:stone",
+    -- Node that replaces all stone nodes between roughly y_min and y_max.
+    node_water = "mars:sand",
+    -- Node that replaces all seawater nodes not in the surface layer
+    node_river_water = "mars:sand",
+    -- Node that replaces river water in mapgens that use
+    -- default:river_water
+    node_riverbed = "mars:stand",
+    depth_riverbed = 2,
+    -- Node placed under river water and thickness of this layer
+    node_cave_liquid = "mars:air",
+    node_cave_liquid = {"mars:air", "mars:air"},
+    -- Nodes placed inside 50% of the medium size caves.
+    -- Multiple nodes can be specified, each cave will use a randomly
+    -- chosen node from the list.
+    -- If this field is left out or 'nil', cave liquids fall back to
+    -- classic behaviour of lava and water distributed using 3D noise.
+    -- For no cave liquid, specify "air".
     y_max = 1000,
-    y_min = -3,
+    y_min = 1,
+    vertical_blend = 8,
+    -- Vertical distance in nodes above 'y_max' over which the biome will
+    -- blend with the biome above.
+    -- Set to 0 for no vertical blend. Defaults to 0.
     heat_point = 50,
     humidity_point = 50,
+    -- Characteristic temperature and humidity for the biome.
+    -- These values create 'biome points' on a voronoi diagram with heat and
+    -- humidity as axes. The resulting voronoi cells determine the
+    -- distribution of the biomes.
+    -- Heat and humidity have average values of 50, vary mostly between
+    -- 0 and 100 but can exceed these values.
+})
+
+minetest.register_decoration({
+    deco_type = "simple",
+    place_on = {"mars:sand"},
+    sidelen = 16,
+    fill_ratio = 0.1,
+    biomes = {"mars_sand"},
+    y_max = 500,
+    y_min = 1,
+    decoration = "rocks:sand_flat",
+})
+
+minetest.register_decoration({
+    deco_type = "simple",
+    place_on = {"mars:sand"},
+    sidelen = 16,
+    fill_ratio = 0.1,
+    biomes = {"mars_sand"},
+    y_max = 500,
+    y_min = 1,
+    decoration = "rocks:sand_round",
+})
+
+minetest.register_decoration({
+    deco_type = "simple",
+    place_on = {"mars:sand"},
+    sidelen = 16,
+    fill_ratio = 0.1,
+    biomes = {"mars_sand"},
+    y_max = 500,
+    y_min = 1,
+    decoration = "rocks:sand_stub",
 })
 
 minetest.register_alias("mapgen_stone", "mars:stone")
 minetest.register_alias("mapgen_water_source", "mars:sand")
-minetest.register_alias("default:cobble", "mars:stone")
+minetest.register_alias("mapgen_river_water_source", "mars:sand")
+minetest.register_alias("mars:stone", "stone")
 itemname = minetest.registered_aliases[itemname] or itemname
