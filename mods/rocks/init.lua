@@ -2,7 +2,7 @@
 --Register Rockset does all the heavy lifting for the mod:
 
 --Name is the starting name of the rock: i.e. stone_pillar
--- Recipe_cobble and recipe_stone refer to the name of the nodes that will become hte crafting recipes
+-- Recipe_cobble and recipe_stone refer to the name of the nodes that will become the crafting recipes
 -- for this registered rockset. For sand, I reccomend sand + sandstone, etc.
 -- Image: this is a plain color image that best matches the color set you are going for
 function register_rockset(name, recipe_cobble, recipe_stone, image)
@@ -39,9 +39,7 @@ function register_rockset(name, recipe_cobble, recipe_stone, image)
         },
 
         tiles = {image},
-        
         groups = { cracky=2 },
-
     })
     
     minetest.register_craft({
@@ -75,10 +73,7 @@ function register_rockset(name, recipe_cobble, recipe_stone, image)
         },
 
         tiles = {image},
-
-        
         groups = { cracky=2 },
-
     })
 
     
@@ -113,9 +108,7 @@ function register_rockset(name, recipe_cobble, recipe_stone, image)
             fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
         },
 
-        tiles = {image},
-
-        
+        tiles = {image}, 
         groups = { cracky=2 },
 
     })
@@ -153,8 +146,6 @@ function register_rockset(name, recipe_cobble, recipe_stone, image)
         },
 
         tiles = {image},
-
-        
         groups = { cracky=2 },
 
     })
@@ -190,8 +181,6 @@ function register_rockset(name, recipe_cobble, recipe_stone, image)
         },
 
         tiles = {image},
-
-        
         groups = { cracky=2 },
 
     })
