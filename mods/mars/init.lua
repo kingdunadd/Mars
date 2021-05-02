@@ -216,4 +216,3 @@ minetest.register_alias("mapgen_stone", "mars:stone")
 minetest.register_alias("mapgen_water_source", "mars:sand")
 minetest.register_alias("mapgen_river_water_source", "mars:sand")
 minetest.register_alias("mars:stone", "stone")
-itemname = minetest.registered_aliases[itemname] or itemname
