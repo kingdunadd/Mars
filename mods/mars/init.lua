@@ -228,7 +228,28 @@ minetest.register_node("mars:air", {
 -- })
 
 
+
+minetest.register_alias("stone", "mars:stone")
+minetest.register_alias("glass", "mars:glass")
+
 -- biomes
+
+
+minetest.register_alias("mapgen_stone", "mars:stone")
+minetest.register_alias("mapgen_water_source", "mars:sand")
+minetest.register_alias("mapgen_river_water_source", "mars:sand")
+minetest.register_alias("mapgen_apple","mars:stone")
+minetest.register_alias("mapgen_dirt","mars:stone")
+minetest.register_alias("mapgen_dirt_with_grass","mars:stone")
+minetest.register_alias("mapgen_cobble","mars:stone")
+minetest.register_alias("mapgen_gravel","mars:stone_with_iron")
+minetest.register_alias("mapgen_junglegrass","mars:stone")
+minetest.register_alias("mapgen_lava_source","mars:air")
+minetest.register_alias("mapgen_leaves","mars:stone")
+minetest.register_alias("mapgen_mossycobble","mars:stone")
+minetest.register_alias("mapgen_sand","mars:sand")
+minetest.register_alias("mapgen_stair_cobble","mars:stair_stone")
+minetest.register_alias("mapgen_tree","mars:stone")
 
 minetest.clear_registered_biomes()
 minetest.clear_registered_decorations()
@@ -249,7 +270,7 @@ minetest.register_biome({
     node_river_water = "mars:sand",
     -- Node that replaces river water in mapgens that use
     -- default:river_water
-    node_riverbed = "mars:stand",
+    node_riverbed = "mars:sand",
     depth_riverbed = 2,
     -- Node placed under river water and thickness of this layer
     node_cave_liquid = "mars:air",
@@ -380,14 +401,7 @@ minetest.register_decoration({
 })
 
 
-minetest.register_alias("mapgen_stone", "mars:stone")
-minetest.register_alias("mapgen_water_source", "mars:sand")
-minetest.register_alias("mapgen_river_water_source", "mars:sand")
-
-minetest.register_alias("stone", "mars:stone")
-minetest.register_alias("glass", "mars:glass")
-
 -- -- load furnace file
--- local default_path = minetest.get_modpath("default")
+local path = minetest.get_modpath("mars")
 
--- dofile(default_path.."/furnace.lua")
+dofile(path.."/furnace.lua")
