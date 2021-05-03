@@ -4,6 +4,69 @@
     --gravity = 0.38, -- mars gravity is 3.711ms-1 or approx 38% of earth
 --})
 
+
+-- pickaxes
+minetest.register_tool("mars:pickaxe_stone", {
+    description = "Mars Stone Pickaxe",
+    inventory_image = "mars_stone_pickaxe.png",
+    tool_capabilities = {
+        tool_capabilities = {
+            full_punch_interval = 1.3,
+            max_drop_level=0,
+            groupcaps={
+                cracky = {times={[2]=2.0, [3]=1.00}, uses=20, maxlevel=1},
+            },
+            damage_groups = {fleshy=3},
+        },
+        groups = {pickaxe = 1}
+    }
+})
+
+minetest.register_tool("mars:pickaxe_steel", {
+    description = "Mars Steel Pickaxe",
+    inventory_image = "mars_steel_pickaxe.png",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=1,
+		groupcaps={
+			cracky = {times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=20, maxlevel=2},
+		},
+		damage_groups = {fleshy=4},
+	},
+	groups = {pickaxe = 1}
+})
+
+-- shovels
+minetest.register_tool("mars:shovel_stone", {
+	description = "Mars Stone Shovel",
+	inventory_image = "mars_stone_shovel.png",
+	wield_image = "mars_stone_shovel.png^[transformR90",
+	tool_capabilities = {
+		full_punch_interval = 1.4,
+		max_drop_level=0,
+		groupcaps={
+			crumbly = {times={[1]=1.80, [2]=1.20, [3]=0.50}, uses=20, maxlevel=1},
+		},
+		damage_groups = {fleshy=2},
+	},
+	groups = {shovel = 1}
+})
+
+minetest.register_tool("mars:shovel_steel", {
+	description = "Mars Steel Shovel",
+	inventory_image = "mars_steel_shovel.png",
+	wield_image = "mars_steel_shovel.png^[transformR90",
+	tool_capabilities = {
+		full_punch_interval = 1.1,
+		max_drop_level=1,
+		groupcaps={
+			crumbly = {times={[1]=1.50, [2]=0.90, [3]=0.40}, uses=30, maxlevel=2},
+		},
+		damage_groups = {fleshy=3},
+	},
+	groups = {shovel = 1}
+})
+
 --Group	                    Best Tool	       Description
 --crumbly	                spade	           Dirt, sand
 --cracky	                pickaxe	           Tough (but brittle) stuff like stone
@@ -19,14 +82,14 @@ minetest.register_node("mars:stone", {
 	description = "Mars Stone",
 	tiles = {"mars_stone.png"},
 	is_ground_content = true,
-	groups = {cracky=3, stone=1},
+	groups = {cracky=2, stone=1},
     drop = "mars:cobblestone"
 })
 
 minetest.register_node("mars:stair_stone", {
     description = "Mars Stone Stair",
     tiles = {"mars_stone.png"},
-    groups = {cracky=3, stone=1},
+    groups = {cracky=2, stone=1},
     drawtype = "nodebox",
     paramtype = "light",
     node_box = {
@@ -43,7 +106,7 @@ minetest.register_node("mars:cobblestone", {
 	description = "Mars Cobblestone",
 	tiles = {"mars_cobblestone.png"},
 	is_ground_content = true,
-	groups = {cracky=3, stone=1}
+	groups = {cracky=2, stone=1}
 })
 
 minetest.register_node("mars:stair_cobblestone", {
@@ -51,7 +114,7 @@ minetest.register_node("mars:stair_cobblestone", {
     tiles = {"mars_cobblestone.png"},
     drawtype = "nodebox",
     paramtype = "light",
-    groups = {cracky=3, stone=1},
+    groups = {cracky=2, stone=1},
     node_box = {
         type = "fixed",
         fixed = {
@@ -66,7 +129,7 @@ minetest.register_node("mars:stone_brick", {
 	description = "Mars Brick",
 	tiles = {"mars_brick.png"},
 	is_ground_content = true,
-	groups = {cracky=3, stone=1}
+	groups = {cracky=2, stone=1}
 })
 
 minetest.register_node("mars:stair_brick", {
@@ -74,7 +137,7 @@ minetest.register_node("mars:stair_brick", {
     tiles = {"mars_brick.png"},
     drawtype = "nodebox",
     paramtype = "light",
-    groups = {cracky=3, stone=1},
+    groups = {cracky=2, stone=1},
     node_box = {
         type = "fixed",
         fixed = {
@@ -89,7 +152,7 @@ minetest.register_node("mars:sand", {
 	description = "Mars Sand",
 	tiles = {"mars_sand.png"},
 	is_ground_content = true,
-	groups = {crumbly=3}
+	groups = {crumbly=2}
 })
 
 minetest.register_node("mars:stair_sand", {
@@ -97,7 +160,7 @@ minetest.register_node("mars:stair_sand", {
     tiles = {"mars_sand.png"},
     drawtype = "nodebox",
     paramtype = "light",
-    groups = {crumbly=3},
+    groups = {crumbly=2},
     node_box = {
         type = "fixed",
         fixed = {
@@ -116,7 +179,7 @@ minetest.register_node("mars:glass", {
     paramtype = "light",
     sunlight_propagates = true, -- Sunlight can shine through block
 	is_ground_content = true,
-	groups = {cracky=3, oddly_breakable_by_hand = 3}
+	groups = {cracky=2, oddly_breakable_by_hand = 3}
 })
 
 
@@ -215,4 +278,6 @@ minetest.register_decoration({
 minetest.register_alias("mapgen_stone", "mars:stone")
 minetest.register_alias("mapgen_water_source", "mars:sand")
 minetest.register_alias("mapgen_river_water_source", "mars:sand")
-minetest.register_alias("mars:stone", "stone")
+
+minetest.register_alias("stone", "mars:stone")
+minetest.register_alias("glass", "mars:glass")
