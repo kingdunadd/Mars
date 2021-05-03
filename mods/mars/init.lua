@@ -76,7 +76,18 @@ minetest.register_tool("mars:shovel_steel", {
 --explody                 	?	               Especially prone to explosions
 --oddly_breakable_by_hand	any	               Torches and such - very quick to dig
 
+minetest.register_node("mars:stone_with_iron", {
+	description = "Mars Stone with Iron Ore",
+	tiles = {"mars_stone_with_iron.png"},
+	is_ground_content = true,
+	groups = {cracky=2, stone=1},
+    drop = "mars:iron_ore"
+})
 
+minetest.register_craftitem("mars:iron_ore", {
+    description = "Mars Iron Ore",
+    inventory_image = "mars_iron_ore.png"
+})
 
 minetest.register_node("mars:stone", {
 	description = "Mars Stone",
@@ -200,6 +211,29 @@ minetest.register_node("mars:air", {
 })
 
 
+
+-- minetest.register_node("mars:synethiser", {
+--     description = "Mars Synethiser",
+--     tiles = {
+--         "mars_synethiser_top.png",   -- y+
+--         "mars_synethiser_top.png",   -- y-
+--         "mars_synethiser_side.png",  -- x+
+--         "mars_synethiser_side.png",  -- x-
+--         "mars_synethiser_side.png",  -- z+
+--         "mars_synethiser_front.png", -- z-
+--     },
+--     paramtype2 = "facedir",
+--     groups = {cracky=2},
+--     legacy_facedir_simple = true,
+-- })
+
+
+-- biomes
+
+minetest.clear_registered_biomes()
+minetest.clear_registered_decorations()
+
+
 minetest.register_biome({
     name = "mars_surface",
     node_top = "mars:stone",
@@ -242,6 +276,76 @@ minetest.register_biome({
     -- 0 and 100 but can exceed these values.
 })
 
+minetest.register_ore({
+    ore_type = "puff",
+    ore = "mars:stone_with_iron",
+    ore_param2 = 3,
+    -- Facedir rotation. Default is 0 (unchanged rotation)
+    wherein = "mars:stone",
+    -- A list of nodenames is supported too
+    clust_scarcity = 1,
+    -- Ore has a 1 out of clust_scarcity chance of spawning in a node.
+    -- If the desired average distance between ores is 'd', set this to
+    -- d * d * d.
+    clust_num_ores = 12,
+    -- Number of ores in a cluster
+    clust_size = 10,
+    -- Size of the bounding box of the cluster.
+    -- In this example, there is a 3 * 3 * 3 cluster where 8 out of the 27
+    -- nodes are coal ore.
+    y_min = -31000,
+    y_max = 64,
+    -- Lower and upper limits for ore
+    flags = "",
+    -- Attributes for the ore generation, see 'Ore attributes' section above
+    noise_threshold = 0.5,
+    -- If noise is above this threshold, ore is placed. Not needed for a
+    -- uniform distribution.
+    noise_params = {
+        offset = 0,
+        scale = 1,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 23,
+        octaves = 3,
+        persist = 0.7
+    },
+    -- NoiseParams structure describing one of the perlin noises used for
+    -- ore distribution.
+    -- Needed by "sheet", "puff", "blob" and "vein" ores.
+    -- Omit from "scatter" ore for a uniform ore distribution.
+    -- Omit from "stratum" ore for a simple horizontal strata from y_min to
+    -- y_max.
+    biomes = {"mars_surface"},
+    -- List of biomes in which this ore occurs.
+    -- Occurs in all biomes if this is omitted, and ignored if the Mapgen
+    -- being used does not support biomes.
+    -- Can be a list of (or a single) biome names, IDs, or definitions.
+    -- Type-specific parameters
+    -- sheet
+    column_height_min = 1,
+    column_height_max = 16,
+    column_midpoint_factor = 0.5,
+
+    -- puff
+    np_puff_top = {
+        offset = 4,
+        scale = 2,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 47,
+        octaves = 3,
+        persist = 0.7
+    },
+    np_puff_bottom = {
+        offset = 4,
+        scale = 2,
+        spread = {x = 100, y = 100, z = 100},
+        seed = 11,
+        octaves = 3,
+        persist = 0.7
+    },
+
+})
+
 minetest.register_decoration({
     deco_type = "simple",
     place_on = {"mars:sand"},
@@ -275,9 +379,15 @@ minetest.register_decoration({
     decoration = "rocks:sand_stub",
 })
 
+
 minetest.register_alias("mapgen_stone", "mars:stone")
 minetest.register_alias("mapgen_water_source", "mars:sand")
 minetest.register_alias("mapgen_river_water_source", "mars:sand")
 
 minetest.register_alias("stone", "mars:stone")
 minetest.register_alias("glass", "mars:glass")
+
+-- -- load furnace file
+-- local default_path = minetest.get_modpath("default")
+
+-- dofile(default_path.."/furnace.lua")
