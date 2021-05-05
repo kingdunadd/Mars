@@ -9,22 +9,22 @@
 -- Formspecs
 --
 
-function mars.get_hotbar_bg(x,y)
+function get_hotbar_bg(x,y)
 	local out = ""
 	for i=0,7,1 do
-		out = out .."image["..x+i..","..y..";1,1;gui_hb_bg.png]"
+		out = out .."image["..x+i..","..y..";1,1;mars_hb_bg.png]"
 	end
 	return out
 end
 
-function mars.get_furnace_active_formspec(fuel_percent, item_percent)
+function get_furnace_active_formspec(fuel_percent, item_percent)
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
 		"list[context;fuel;2.75,2.5;1,1;]"..
 		"image[2.75,1.5;1,1;default_furnace_fire_bg.png^[lowpart:"..
 		(fuel_percent)..":default_furnace_fire_fg.png]"..
 		"image[3.75,1.5;1,1;gui_furnace_arrow_bg.png^[lowpart:"..
-		(item_percent)..":gui_furnace_arrow_fg.png^[transformR270]"..
+		(item_percent)..":mars_synethiser_arrow.png^[transformR270]"..
 		"list[context;dst;4.75,0.96;2,2;]"..
 		"list[current_player;main;0,4.25;8,1;]"..
 		"list[current_player;main;0,5.5;8,3;8]"..
@@ -34,10 +34,10 @@ function mars.get_furnace_active_formspec(fuel_percent, item_percent)
 		"listring[current_player;main]"..
 		"listring[context;fuel]"..
 		"listring[current_player;main]"..
-		mars.get_hotbar_bg(0, 4.25)
+		get_hotbar_bg(0, 4.25)
 end
 
-function mars.get_furnace_inactive_formspec()
+function get_furnace_inactive_formspec()
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
 		"list[context;fuel;2.75,2.5;1,1;]"..
@@ -52,7 +52,7 @@ function mars.get_furnace_inactive_formspec()
 		"listring[current_player;main]"..
 		"listring[context;fuel]"..
 		"listring[current_player;main]"..
-		mars.get_hotbar_bg(0, 4.25)
+		get_hotbar_bg(0, 4.25)
 end
 
 --
@@ -249,7 +249,7 @@ local function furnace_node_timer(pos, elapsed)
 		active = true
 		local fuel_percent = 100 - math.floor(fuel_time / fuel_totaltime * 100)
 		fuel_state = "@1%", fuel_percent
-		formspec = mars.get_furnace_active_formspec(fuel_percent, item_percent)
+		formspec = get_furnace_active_formspec(fuel_percent, item_percent)
 		-- swap_node(pos, "default:furnace_active")
 		-- make sure timer restarts automatically
 		result = true
@@ -263,7 +263,7 @@ local function furnace_node_timer(pos, elapsed)
 		if fuellist and not fuellist[1]:is_empty() then
 			fuel_state = "@1%", 0
 		end
-		formspec = mars.get_furnace_inactive_formspec()
+		formspec = get_furnace_inactive_formspec()
 		-- swap_node(pos, "mars:synethiser")
 		-- stop timer on the inactive furnace
 		minetest.get_node_timer(pos):stop()
@@ -337,9 +337,9 @@ minetest.register_node("mars:synethiser", {
 	end,
 	on_blast = function(pos)
 		local drops = {}
-		mars.get_inventory_drops(pos, "src", drops)
-		mars.get_inventory_drops(pos, "fuel", drops)
-		mars.get_inventory_drops(pos, "dst", drops)
+		get_inventory_drops(pos, "src", drops)
+		get_inventory_drops(pos, "fuel", drops)
+		get_inventory_drops(pos, "dst", drops)
 		drops[#drops+1] = "mars:synethiser"
 		minetest.remove_node(pos)
 		return drops
