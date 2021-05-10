@@ -282,9 +282,15 @@ minetest.register_alias("glass", "mars:glass")
 
 -- biomes
 
+minetest.set_mapgen_setting("mg_flags", "caves, nodungeons, light, decorations, biomes", true)
+
+minetest.clear_registered_biomes()
+minetest.clear_registered_decorations()
+
 minetest.register_alias("mapgen_stone", "mars:stone")
 minetest.register_alias("mapgen_water_source", "mars:sand")
 minetest.register_alias("mapgen_river_water_source", "mars:sand")
+
 minetest.register_alias("mapgen_apple","mars:stone")
 minetest.register_alias("mapgen_dirt","mars:stone")
 minetest.register_alias("mapgen_dirt_with_grass","mars:stone")
@@ -298,8 +304,7 @@ minetest.register_alias("mapgen_sand","mars:sand")
 minetest.register_alias("mapgen_stair_cobble","mars:stair_stone")
 minetest.register_alias("mapgen_tree","mars:stone")
 
-minetest.clear_registered_biomes()
-minetest.clear_registered_decorations()
+
 
 
 minetest.register_biome({
@@ -416,35 +421,35 @@ minetest.register_ore({
 
 minetest.register_decoration({
     deco_type = "simple",
-    place_on = {"mars:sand"},
+    place_on = {"mars:and"},
     sidelen = 16,
     fill_ratio = 0.1,
-    biomes = {"mars_sand"},
+    biomes = {"mars_surface"},
     y_max = 500,
-    y_min = 1,
+    y_min = -100,
     decoration = "rocks:sand_flat",
 })
 
 minetest.register_decoration({
     deco_type = "simple",
-    place_on = {"mars:sand"},
+    place_on = {"mars:stone"},
     sidelen = 16,
     fill_ratio = 0.1,
-    biomes = {"mars_sand"},
+    biomes = {"mars_surface"},
     y_max = 500,
     y_min = 1,
-    decoration = "rocks:sand_round",
+    decoration = "rocks:stone_round",
 })
 
 minetest.register_decoration({
     deco_type = "simple",
-    place_on = {"mars:sand"},
+    place_on = {"mars:stone"},
     sidelen = 16,
     fill_ratio = 0.1,
-    biomes = {"mars_sand"},
+    biomes = {"mars_surface"},
     y_max = 500,
     y_min = 1,
-    decoration = "rocks:sand_stub",
+    decoration = "rocks:stone_stub",
 })
 
 
