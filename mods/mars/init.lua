@@ -89,6 +89,20 @@ minetest.register_craftitem("mars:iron_ore", {
     inventory_image = "mars_iron_ore.png"
 })
 
+minetest.register_craftitem("mars:iron_ingot", {
+    description = "Mars Iron Ingot",
+    inventory_image = "mars_iron_ingot.png"
+})
+
+minetest.register_craft({
+    type = "cooking",
+    output = "mars:iron_ingot",
+    recipe = "mars:iron_ore",
+    cooktime = 10,
+})
+
+
+-- stone
 minetest.register_node("mars:stone", {
 	description = "Mars Stone",
 	tiles = {"mars_stone.png"},
@@ -112,6 +126,17 @@ minetest.register_node("mars:stair_stone", {
     }
 })
 
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:stair_stone 6",
+    recipe = {
+        {"",           "",           "mars:stone"},
+        {"",           "mars:stone", "mars:stone"},
+        {"mars:stone", "mars:stone", "mars:stone"}
+    }
+})
+
+-- cobblestone
 
 minetest.register_node("mars:cobblestone", {
 	description = "Mars Cobblestone",
@@ -135,7 +160,18 @@ minetest.register_node("mars:stair_cobblestone", {
     }
 })
 
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:stair_cobblestone 6",
+    recipe = {
+        {"",                 "",                 "mars:cobblestone"},
+        {"",                 "mars:cobblestone", "mars:cobblestone"},
+        {"mars:cobblestone", "mars:cobblestone", "mars:cobblestone"}
+    }
+})
 
+
+-- stone brick
 minetest.register_node("mars:stone_brick", {
 	description = "Mars Brick",
 	tiles = {"mars_brick.png"},
@@ -158,7 +194,18 @@ minetest.register_node("mars:stair_brick", {
     }
 })
 
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:stair_brick 6",
+    recipe = {
+        {"",                 "",                 "mars:stone_brick"},
+        {"",                 "mars:stone_brick", "mars:stone_brick"},
+        {"mars:stone_brick", "mars:stone_brick", "mars:stone_brick"}
+    }
+})
 
+
+-- sand
 minetest.register_node("mars:sand", {
 	description = "Mars Sand",
 	tiles = {"mars_sand.png"},
@@ -181,7 +228,18 @@ minetest.register_node("mars:stair_sand", {
     }
 })
 
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:stair_sand 6",
+    recipe = {
+        {"",          "",          "mars:sand"},
+        {"",          "mars:sand", "mars:sand"},
+        {"mars:sand", "mars:sand", "mars:sand"}
+    }
+})
 
+
+-- glass
 minetest.register_node("mars:glass", {
 	description = "Mars Glass",
     drawtype = "glasslike_framed",
@@ -193,6 +251,12 @@ minetest.register_node("mars:glass", {
 	groups = {cracky=2, oddly_breakable_by_hand = 3}
 })
 
+minetest.register_craft({
+    type = "cooking",
+    output = "mars:sand",
+    recipe = "mars:glass",
+    cooktime = 5,
+})
 
 minetest.register_node("mars:air", {
     description = "Mars Air (how are you seeing this?!)",
@@ -212,28 +276,11 @@ minetest.register_node("mars:air", {
 
 
 
--- minetest.register_node("mars:synethiser", {
---     description = "Mars Synethiser",
---     tiles = {
---         "mars_synethiser_top.png",   -- y+
---         "mars_synethiser_top.png",   -- y-
---         "mars_synethiser_side.png",  -- x+
---         "mars_synethiser_side.png",  -- x-
---         "mars_synethiser_side.png",  -- z+
---         "mars_synethiser_front.png", -- z-
---     },
---     paramtype2 = "facedir",
---     groups = {cracky=2},
---     legacy_facedir_simple = true,
--- })
-
-
-
 minetest.register_alias("stone", "mars:stone")
 minetest.register_alias("glass", "mars:glass")
 
--- biomes
 
+-- biomes
 
 minetest.register_alias("mapgen_stone", "mars:stone")
 minetest.register_alias("mapgen_water_source", "mars:sand")
