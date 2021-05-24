@@ -22,6 +22,27 @@ minetest.register_tool("mars:pickaxe_stone", {
     }
 })
 
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:pickaxe_stone",
+    recipe = {
+        {"mars:stone", "mars:stone",      "mars:stone"},
+        {"",           "mars:steel_rod",  ""},
+        {"",           "mars:steel_rod",  ""}
+    }
+})
+
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:pickaxe_stone",
+    recipe = {
+        {"mars:cobblestone", "mars:cobblestone",     "mars:cobblestone"},
+        {"",                 "mars:steel_rod",       ""},
+        {"",                 "mars:steel_rod",       ""}
+    }
+})
+
+
 minetest.register_tool("mars:pickaxe_steel", {
     description = "Mars Steel Pickaxe",
     inventory_image = "mars_steel_pickaxe.png",
@@ -34,6 +55,16 @@ minetest.register_tool("mars:pickaxe_steel", {
 		damage_groups = {fleshy=4},
 	},
 	groups = {pickaxe = 1}
+})
+
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:pickaxe_steel",
+    recipe = {
+        {"mars:steel_ingot", "mars:steel_ingot",   "mars:steel_ingot"},
+        {"",                "mars:steel_rod",    ""},
+        {"",                "mars:steel_rod",    ""}
+    }
 })
 
 -- shovels
@@ -52,6 +83,26 @@ minetest.register_tool("mars:shovel_stone", {
 	groups = {shovel = 1}
 })
 
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:shovel_stone",
+    recipe = {
+        {"", "mars:stone",      ""},
+        {"", "mars:steel_rod",  ""},
+        {"", "mars:steel_rod",  ""}
+    }
+})
+
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:shovel_stone",
+    recipe = {
+        {"", "mars:cobblestone",      ""},
+        {"", "mars:steel_rod",  ""},
+        {"", "mars:steel_rod",  ""}
+    }
+})
+
 minetest.register_tool("mars:shovel_steel", {
 	description = "Mars Steel Shovel",
 	inventory_image = "mars_steel_shovel.png",
@@ -66,6 +117,17 @@ minetest.register_tool("mars:shovel_steel", {
 	},
 	groups = {shovel = 1}
 })
+
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:shovel_steel",
+    recipe = {
+        {"", "mars:steel_ingot",      ""},
+        {"", "mars:steel_rod",  ""},
+        {"", "mars:steel_rod",  ""}
+    }
+})
+
 
 --Group	                    Best Tool	       Description
 --crumbly	                spade	           Dirt, sand
@@ -89,16 +151,30 @@ minetest.register_craftitem("mars:iron_ore", {
     inventory_image = "mars_iron_ore.png"
 })
 
-minetest.register_craftitem("mars:iron_ingot", {
-    description = "Mars Iron Ingot",
-    inventory_image = "mars_iron_ingot.png"
+minetest.register_craftitem("mars:steel_ingot", {
+    description = "Mars Steel Ingot",
+    inventory_image = "mars_steel_ingot.png"
 })
 
 minetest.register_craft({
     type = "cooking",
-    output = "mars:iron_ingot",
+    output = "mars:steel_ingot",
     recipe = "mars:iron_ore",
     cooktime = 10,
+})
+
+minetest.register_craftitem("mars:steel_rod", {
+    description = "Mars Steel Rod",
+    inventory_image = "mars_steel_rod.png"
+})
+
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:steel_rod 4",
+    recipe = {
+        {"mars:steel_ingot"},
+        {"mars:steel_ingot"}
+    }
 })
 
 
@@ -421,12 +497,12 @@ minetest.register_ore({
 
 minetest.register_decoration({
     deco_type = "simple",
-    place_on = {"mars:and"},
+    place_on = {"mars:sand"},
     sidelen = 16,
-    fill_ratio = 0.1,
+    fill_ratio = 0.01,
     biomes = {"mars_surface"},
-    y_max = 500,
-    y_min = -100,
+    y_max = 100,
+    y_min = -500,
     decoration = "rocks:sand_flat",
 })
 
@@ -434,7 +510,7 @@ minetest.register_decoration({
     deco_type = "simple",
     place_on = {"mars:stone"},
     sidelen = 16,
-    fill_ratio = 0.1,
+    fill_ratio = 0.04,
     biomes = {"mars_surface"},
     y_max = 500,
     y_min = 1,
@@ -445,7 +521,7 @@ minetest.register_decoration({
     deco_type = "simple",
     place_on = {"mars:stone"},
     sidelen = 16,
-    fill_ratio = 0.1,
+    fill_ratio = 0.03,
     biomes = {"mars_surface"},
     y_max = 500,
     y_min = 1,
