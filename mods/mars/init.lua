@@ -67,6 +67,7 @@ minetest.register_craft({
     }
 })
 
+
 -- shovels
 minetest.register_tool("mars:shovel_stone", {
 	description = "Mars Stone Shovel",
@@ -103,6 +104,7 @@ minetest.register_craft({
     }
 })
 
+
 minetest.register_tool("mars:shovel_steel", {
 	description = "Mars Steel Shovel",
 	inventory_image = "mars_steel_shovel.png",
@@ -138,6 +140,7 @@ minetest.register_craft({
 --explody                 	?	               Especially prone to explosions
 --oddly_breakable_by_hand	any	               Torches and such - very quick to dig
 
+-- iron
 minetest.register_node("mars:stone_with_iron", {
 	description = "Mars Stone with Iron Ore",
 	tiles = {"mars_stone_with_iron.png"},
@@ -170,7 +173,7 @@ minetest.register_craftitem("mars:steel_rod", {
 
 minetest.register_craft({
     type = "shaped",
-    output = "mars:steel_rod 4",
+    output = "mars:steel_rod 8",
     recipe = {
         {"mars:steel_ingot"},
         {"mars:steel_ingot"}
@@ -327,10 +330,36 @@ minetest.register_node("mars:glass", {
 	groups = {cracky=2, oddly_breakable_by_hand = 3}
 })
 
+minetest.register_node("mars:stair_glass", {
+    description = "Mars Glass Stair",
+    tiles = {"mars_glass.png"},
+    drawtype = "nodebox",
+    paramtype = "light",
+    sunlight_propagates = true,
+	groups = {cracky=2, oddly_breakable_by_hand = 3},
+    node_box = {
+        type = "fixed",
+        fixed = {
+            {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+            {-0.5, 0, 0, 0.5, 0.5, 0.5},
+        },
+    }
+})
+
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:stair_glass 6",
+    recipe = {
+        {"",           "",           "mars:glass"},
+        {"",           "mars:glass", "mars:glass"},
+        {"mars:glass", "mars:glass", "mars:glass"}
+    }
+})
+
 minetest.register_craft({
     type = "cooking",
-    output = "mars:sand",
-    recipe = "mars:glass",
+    output = "mars:glass",
+    recipe = "mars:sand",
     cooktime = 5,
 })
 

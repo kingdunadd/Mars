@@ -20,7 +20,7 @@ function get_furnace_active_formspec( item_percent)
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
 		"image[3.75,1.5;1,1;mars_synesthiser_arrow.png^[lowpart:"..
-		(item_percent)..":mars_synesthiser_arrow.png^[transformR270]"..
+		(item_percent)..":mars_synesthiser_arrow.png^[transformR360]"..
 		"list[context;dst;4.75,0.96;2,2;]"..
 		"list[current_player;main;0,4.25;8,1;]"..
 		"list[current_player;main;0,5.5;8,3;8]"..
@@ -35,7 +35,7 @@ end
 function get_furnace_inactive_formspec()
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
-		"image[3.75,1.5;1,1;mars_synesthiser_arrow.png^[transformR270]"..
+		"image[3.75,1.5;1,1;mars_synesthiser_arrow.png^[transformR360]"..
 		"list[context;dst;4.75,0.96;2,2;]"..
 		"list[current_player;main;0,4.25;8,1;]"..
 		"list[current_player;main;0,5.5;8,3;8]"..
@@ -122,8 +122,9 @@ local function furnace_node_timer(pos, elapsed)
 		local aftercooked
 		cooked, aftercooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
 		cookable = cooked.time ~= 0
+		src_time = meta:get_float("src_time") or 0
 
-		el = math.min(el, cooked.time - src_time)
+		el = math.min(elapsed, cooked.time - src_time)
 
 		-- If there is a cookable item then check if it is ready yet
 			if cookable then
