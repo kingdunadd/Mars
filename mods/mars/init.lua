@@ -190,20 +190,20 @@ minetest.register_node("mars:stone", {
     drop = "mars:cobblestone"
 })
 
-minetest.register_node("mars:stair_stone", {
-    description = "Mars Stone Stair",
-    tiles = {"mars_stone.png"},
-    groups = {cracky=2, stone=1},
-    drawtype = "nodebox",
-    paramtype = "light",
-    node_box = {
-        type = "fixed",
-        fixed = {
-            {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-            {-0.5, 0, 0, 0.5, 0.5, 0.5},
-        },
-    }
-})
+-- minetest.register_node("mars:stair_stone", {
+--     description = "Mars Stone Stair",
+--     tiles = {"mars_stone.png"},
+--     groups = {cracky=2, stone=1},
+--     drawtype = "nodebox",
+--     paramtype = "light",
+--     node_box = {
+--         type = "fixed",
+--         fixed = {
+--             {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+--             {-0.5, 0, 0, 0.5, 0.5, 0.5},
+--         },
+--     }
+-- })
 
 minetest.register_craft({
     type = "shaped",
@@ -224,20 +224,20 @@ minetest.register_node("mars:cobblestone", {
 	groups = {cracky=2, stone=1}
 })
 
-minetest.register_node("mars:stair_cobblestone", {
-    description = "Mars Cobblestone Stair",
-    tiles = {"mars_cobblestone.png"},
-    drawtype = "nodebox",
-    paramtype = "light",
-    groups = {cracky=2, stone=1},
-    node_box = {
-        type = "fixed",
-        fixed = {
-            {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-            {-0.5, 0, 0, 0.5, 0.5, 0.5},
-        },
-    }
-})
+-- minetest.register_node("mars:stair_cobblestone", {
+--     description = "Mars Cobblestone Stair",
+--     tiles = {"mars_cobblestone.png"},
+--     drawtype = "nodebox",
+--     paramtype = "light",
+--     groups = {cracky=2, stone=1},
+--     node_box = {
+--         type = "fixed",
+--         fixed = {
+--             {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+--             {-0.5, 0, 0, 0.5, 0.5, 0.5},
+--         },
+--     }
+-- })
 
 minetest.register_craft({
     type = "shaped",
@@ -258,20 +258,20 @@ minetest.register_node("mars:stone_brick", {
 	groups = {cracky=2, stone=1}
 })
 
-minetest.register_node("mars:stair_brick", {
-    description = "Mars Brick Stair",
-    tiles = {"mars_brick.png"},
-    drawtype = "nodebox",
-    paramtype = "light",
-    groups = {cracky=2, stone=1},
-    node_box = {
-        type = "fixed",
-        fixed = {
-            {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-            {-0.5, 0, 0, 0.5, 0.5, 0.5},
-        },
-    }
-})
+-- minetest.register_node("mars:stair_brick", {
+--     description = "Mars Brick Stair",
+--     tiles = {"mars_brick.png"},
+--     drawtype = "nodebox",
+--     paramtype = "light",
+--     groups = {cracky=2, stone=1},
+--     node_box = {
+--         type = "fixed",
+--         fixed = {
+--             {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+--             {-0.5, 0, 0, 0.5, 0.5, 0.5},
+--         },
+--     }
+-- })
 
 minetest.register_craft({
     type = "shaped",
@@ -292,20 +292,20 @@ minetest.register_node("mars:sand", {
 	groups = {crumbly=2}
 })
 
-minetest.register_node("mars:stair_sand", {
-    description = "Mars Sand Stair",
-    tiles = {"mars_sand.png"},
-    drawtype = "nodebox",
-    paramtype = "light",
-    groups = {crumbly=2},
-    node_box = {
-        type = "fixed",
-        fixed = {
-            {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-            {-0.5, 0, 0, 0.5, 0.5, 0.5},
-        },
-    }
-})
+-- minetest.register_node("mars:stair_sand", {
+--     description = "Mars Sand Stair",
+--     tiles = {"mars_sand.png"},
+--     drawtype = "nodebox",
+--     paramtype = "light",
+--     groups = {crumbly=2},
+--     node_box = {
+--         type = "fixed",
+--         fixed = {
+--             {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+--             {-0.5, 0, 0, 0.5, 0.5, 0.5},
+--         },
+--     }
+-- })
 
 minetest.register_craft({
     type = "shaped",
@@ -330,21 +330,21 @@ minetest.register_node("mars:glass", {
 	groups = {cracky=2, oddly_breakable_by_hand = 3}
 })
 
-minetest.register_node("mars:stair_glass", {
-    description = "Mars Glass Stair",
-    tiles = {"mars_glass.png"},
-    drawtype = "nodebox",
-    paramtype = "light",
-    sunlight_propagates = true,
-	groups = {cracky=2, oddly_breakable_by_hand = 3},
-    node_box = {
-        type = "fixed",
-        fixed = {
-            {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-            {-0.5, 0, 0, 0.5, 0.5, 0.5},
-        },
-    }
-})
+-- minetest.register_node("mars:stair_glass", {
+--     description = "Mars Glass Stair",
+--     tiles = {"mars_glass.png"},
+--     drawtype = "nodebox",
+--     paramtype = "light",
+--     sunlight_propagates = true,
+-- 	groups = {cracky=2, oddly_breakable_by_hand = 3},
+--     node_box = {
+--         type = "fixed",
+--         fixed = {
+--             {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+--             {-0.5, 0, 0, 0.5, 0.5, 0.5},
+--         },
+--     }
+-- })
 
 minetest.register_craft({
     type = "shaped",
