@@ -154,6 +154,13 @@ minetest.register_craftitem("mars:steel_ingot", {
     inventory_image = "mars_steel_ingot.png"
 })
 
+minetest.register_node("mars:steel_block", {
+	description = "Mars Steel Block",
+	tiles = {"mars_steel_block.png"},
+	is_ground_content = true,
+	groups = {cracky=2}
+})
+
 minetest.register_craft({
     type = "cooking",
     output = "mars:steel_ingot",
@@ -202,6 +209,7 @@ minetest.register_craft({
     cooktime = 5,
 })
 
+
 -- stone brick
 minetest.register_node("mars:stone_brick", {
 	description = "Mars Brick",
@@ -209,7 +217,6 @@ minetest.register_node("mars:stone_brick", {
 	is_ground_content = true,
 	groups = {cracky=2, stone=1}
 })
-
 
 
 -- sand
@@ -221,7 +228,6 @@ minetest.register_node("mars:sand", {
 })
 
 
-
 -- glass
 minetest.register_node("mars:glass", {
 	description = "Mars Glass",
@@ -231,7 +237,7 @@ minetest.register_node("mars:glass", {
     paramtype = "light",
     sunlight_propagates = true, -- Sunlight can shine through block
 	is_ground_content = true,
-	groups = {cracky=2, oddly_breakable_by_hand = 3}
+	groups = {cracky=2, oddly_breakable_by_hand = 1}
 })
 
 

@@ -174,9 +174,9 @@ local function furnace_node_timer(pos, elapsed)
 		end
 	else
 		if srclist and not srclist[1]:is_empty() then
-			item_state = "Empty"
+			item_state = "Not synethsisable"
 		else
-			item_state = "Not cookable"
+			item_state = "Empty"
 		end
 	end
 
