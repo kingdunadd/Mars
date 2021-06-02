@@ -1,7 +1,0 @@
-
-#	itemname target texture
-#For example,
-#	default:dirt_with_grass sides default_stone.png
-
-sun.png
-mars_wieldhand.png

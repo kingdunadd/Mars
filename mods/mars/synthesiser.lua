@@ -19,8 +19,8 @@ end
 function get_furnace_active_formspec( item_percent)
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
-		"image[3.75,1.5;1,1;mars_synesthiser_arrow.png^[lowpart:"..
-		(item_percent)..":mars_synesthiser_arrow.png^[transformR360]"..
+		"image[3.75,1.5;1,1;mars_synthesiser_arrow.png^[lowpart:"..
+		(item_percent)..":mars_synthesiser_arrow.png^[transformR360]"..
 		"list[context;dst;4.75,0.96;2,2;]"..
 		"list[current_player;main;0,4.25;8,1;]"..
 		"list[current_player;main;0,5.5;8,3;8]"..
@@ -35,7 +35,7 @@ end
 function get_furnace_inactive_formspec()
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
-		"image[3.75,1.5;1,1;mars_synesthiser_arrow.png^[transformR360]"..
+		"image[3.75,1.5;1,1;mars_synthesiser_arrow.png^[transformR360]"..
 		"list[context;dst;4.75,0.96;2,2;]"..
 		"list[current_player;main;0,4.25;8,1;]"..
 		"list[current_player;main;0,5.5;8,3;8]"..
@@ -174,7 +174,7 @@ local function furnace_node_timer(pos, elapsed)
 		end
 	else
 		if srclist and not srclist[1]:is_empty() then
-			item_state = "Not synethsisable"
+			item_state = "Not synthesisable"
 		else
 			item_state = "Empty"
 		end
@@ -186,7 +186,7 @@ local function furnace_node_timer(pos, elapsed)
 	if not cookable then
 		active = "inactive"
 		formspec = get_furnace_inactive_formspec()
-		swap_node(pos, "mars:synesthiser")
+		swap_node(pos, "mars:synthesiser")
 		-- stop timer on the inactive furnace
 		minetest.get_node_timer(pos):stop()
 		meta:set_int("timer_elapsed", 0)
@@ -194,7 +194,7 @@ local function furnace_node_timer(pos, elapsed)
 	else
 		active = "active"
 		formspec = get_furnace_active_formspec(item_percent)
-		swap_node(pos, "mars:synesthiser_active")
+		swap_node(pos, "mars:synthesiser_active")
 		-- make sure timer restarts automatically
 		result = true
 
@@ -217,15 +217,15 @@ end
 -- Node definitions
 --
 
-minetest.register_node("mars:synesthiser", {
-    description = "Mars synesthiser",
+minetest.register_node("mars:synthesiser", {
+    description = "Mars synthesiser",
     tiles = {
-        "mars_synesthiser_top.png",   -- y+
-        "mars_synesthiser_top.png",   -- y-
-        "mars_synesthiser_side.png",  -- x+
-        "mars_synesthiser_side.png",  -- x-
-        "mars_synesthiser_side.png",  -- z+
-        "mars_synesthiser_front.png", -- z-
+        "mars_synthesiser_top.png",   -- y+
+        "mars_synthesiser_top.png",   -- y-
+        "mars_synthesiser_side.png",  -- x+
+        "mars_synthesiser_side.png",  -- x-
+        "mars_synthesiser_side.png",  -- z+
+        "mars_synthesiser_front.png", -- z-
     },
 	paramtype2 = "facedir",
 	groups = {cracky=2},
@@ -259,7 +259,7 @@ minetest.register_node("mars:synesthiser", {
 		local drops = {}
 		get_inventory_drops(pos, "src", drops)
 		get_inventory_drops(pos, "dst", drops)
-		drops[#drops+1] = "mars:synesthiser"
+		drops[#drops+1] = "mars:synthesiser"
 		minetest.remove_node(pos)
 		return drops
 	end,
@@ -270,7 +270,7 @@ minetest.register_node("mars:synesthiser", {
 })
 
 minetest.register_craft({
-	output = "mars:synesthiser",
+	output = "mars:synthesiser",
 	recipe = {
 		{"group:stone", "group:stone", "group:stone"},
 		{"group:stone", "", "group:stone"},
@@ -279,19 +279,19 @@ minetest.register_craft({
 })
 
 
-minetest.register_node("mars:synesthiser_active", {
-    description = "Mars synesthiser",
+minetest.register_node("mars:synthesiser_active", {
+    description = "Mars synthesiser",
     tiles = {
-        "mars_synesthiser_active_top.png",   -- y+
-        "mars_synesthiser_active_top.png",   -- y-
-        "mars_synesthiser_active_side.png",  -- x+
-        "mars_synesthiser_active_side.png",  -- x-
-        "mars_synesthiser_active_side.png",  -- z+
-        "mars_synesthiser_active_front.png", -- z-
+        "mars_synthesiser_active_top.png",   -- y+
+        "mars_synthesiser_active_top.png",   -- y-
+        "mars_synthesiser_active_side.png",  -- x+
+        "mars_synthesiser_active_side.png",  -- x-
+        "mars_synthesiser_active_side.png",  -- z+
+        "mars_synthesiser_active_front.png", -- z-
     },
 	paramtype2 = "facedir",
 	light_source = 8,
-	drop = "mars:synesthiser",
+	drop = "mars:synthesiser",
 	groups = {cracky=2, not_in_creative_inventory=1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,

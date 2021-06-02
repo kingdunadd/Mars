@@ -218,6 +218,15 @@ minetest.register_node("mars:stone_brick", {
 	groups = {cracky=2, stone=1}
 })
 
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:stone_brick 9",
+    recipe = {
+        {"mars:cobblestone","mars:cobblestone","mars:cobblestone"},
+        {"mars:sand",       "mars:sand",        "mars:sand"},
+        {"mars:cobblestone","mars:cobblestone","mars:cobblestone"}
+    }
+})
 
 -- sand
 minetest.register_node("mars:sand", {
@@ -271,8 +280,9 @@ minetest.register_node("mars:air", {
 -- -- load other files
 local path = minetest.get_modpath("mars")
 
-dofile(path.."/furnace.lua")
+dofile(path.."/synthesiser.lua")
 dofile(path.."/biomes.lua")
 dofile(path.."/player.lua")
 dofile(path.."/aliases.lua")
+dofile(path.."/solar.lua")
 
