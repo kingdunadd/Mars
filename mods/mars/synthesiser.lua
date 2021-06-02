@@ -16,7 +16,7 @@ function get_hotbar_bg(x,y)
 	return out
 end
 
-function get_furnace_active_formspec( item_percent)
+function get_furnace_active_formspec(item_percent)
 	return "size[8,8.5]"..
 		"list[context;src;2.75,0.5;1,1;]"..
 		"image[3.75,1.5;1,1;mars_synthesiser_arrow.png^[lowpart:"..
