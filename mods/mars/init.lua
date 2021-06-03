@@ -274,8 +274,21 @@ minetest.register_node("mars:air", {
 })
 
 
-
-
+-- light sources
+minetest.register_node("mars:light_panel", {
+    description = "Mars Light Panel",
+    drawtype = "nodebox",
+    tiles = {"mars_light_panel.png"},
+    inventory_image = {"mars_light_panel_front.png"},
+    light_source = 15,
+    groups = {cracky=2},
+    node_box = {
+        type = "fixed",
+        fixed = {
+            {-0.3, -0.5, -0.45,   0.3, 0.5, -0.5},
+        },
+    },
+})
 
 -- -- load other files
 local path = minetest.get_modpath("mars")
