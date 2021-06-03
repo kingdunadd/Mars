@@ -222,9 +222,9 @@ minetest.register_craft({
     type = "shaped",
     output = "mars:stone_brick 9",
     recipe = {
-        {"mars:cobblestone","mars:cobblestone","mars:cobblestone"},
-        {"mars:sand",       "mars:sand",        "mars:sand"},
-        {"mars:cobblestone","mars:cobblestone","mars:cobblestone"}
+        {"group:stone","group:stone","group:stone"},
+        {"mars:sand",  "mars:sand",  "mars:sand"},
+        {"group:stone","group:stone","group:stone"}
     }
 })
 
@@ -282,12 +282,13 @@ minetest.register_node("mars:light_panel", {
     inventory_image = {"mars_light_panel_front.png"},
     light_source = 15,
     groups = {cracky=2},
+    paramtype2 = "wallmounted",
     node_box = {
-        type = "fixed",
-        fixed = {
-            {-0.3, -0.5, -0.45,   0.3, 0.5, -0.5},
-        },
-    },
+		type = "wallmounted",
+		wall_side = {-0.5, -0.45, -0.3, -0.45, 0.45, 0.3},
+        wall_top = {-0.3, 0.5, -0.5, 0.3, 0.45, 0.5},
+		wall_bottom = {-0.3, -0.5, -0.5, 0.3, -0.45, 0.5},
+	},
 })
 
 -- -- load other files
