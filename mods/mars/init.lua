@@ -7,7 +7,7 @@ minetest.register_tool("mars:pickaxe_stone", {
     tool_capabilities = {
         tool_capabilities = {
             full_punch_interval = 1.3,
-            max_drop_level=0,
+            max_drop_level = 0,
             groupcaps={
                 cracky = {times={[2]=2.0, [3]=1.00}, uses=20, maxlevel=1},
             },
@@ -289,6 +289,16 @@ minetest.register_node("mars:light_panel", {
         wall_top = {-0.3, 0.5, -0.5, 0.3, 0.45, 0.5},
 		wall_bottom = {-0.3, -0.5, -0.5, 0.3, -0.45, 0.5},
 	},
+})
+
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:light_panel 9",
+    recipe = {
+        {"mars:glass","mars:glass","mars:glass"},
+        {"mars:glass",  "mars:battery",  "mars:glass"},
+        {"mars:glass","mars:glass","mars:glass"}
+    }
 })
 
 -- -- load other files

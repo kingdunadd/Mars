@@ -100,39 +100,35 @@ local function charger_node_timer(pos, elapsed)
 		srclist = inv:get_list("src")
 
 		-- Check if we have chargeable content
-		local aftercooked
-		cooked, aftercooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
-		chargeable = cooked.time ~= 0
+		local aftercharged
+		charged, aftercharged = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
+		chargeable = charged.time ~= 0
 		src_time = meta:get_float("src_time") or 0
 
-		el = math.min(elapsed, cooked.time - src_time)
+		el = math.min(elapsed, charged.time - src_time)
 
 		-- If there is a chargeable item then check if it is ready yet
 			if chargeable then
 				src_time = src_time + el
-				if src_time >= cooked.time then
+				if src_time >= charged.time then
 					-- Place result in dst list if possible
-					if inv:room_for_item("dst", cooked.item) then
-						inv:add_item("dst", cooked.item)
-						inv:set_stack("src", 1, aftercooked.items[1])
-						src_time = src_time - cooked.time
+					if inv:room_for_item("dst", charged.item) then
+						inv:add_item("dst", charged.item)
+						inv:set_stack("src", 1, aftercharged.items[1])
+						src_time = src_time - charged.time
 						update = true
 					else
 						dst_full = true
 					end
 				else
-					-- Item could not be cooked: probably missing fuel
+					-- Item could not be cooked:
 					update = true
 				end
 			else
-				-- no fuel
-				if chargeable then
-					-- no fuel needed
-				else
-					-- We don't need to get new fuel since there is no chargeable item
+				if not chargeable then
 					src_time = 0
 				end
-			end
+			end	
 		elapsed = elapsed - el
 	end
 
@@ -155,7 +151,7 @@ local function charger_node_timer(pos, elapsed)
 		end
 	else
 		if srclist and not srclist[1]:is_empty() then
-			item_state = "Not synthesisable"
+			item_state = "Not chargeable"
 		else
 			item_state = "Empty"
 		end
@@ -172,7 +168,7 @@ local function charger_node_timer(pos, elapsed)
 		meta:set_int("timer_elapsed", 0)
 	else
 		active = "active"
-		formspec = get_furnace_active_formspec(item_percent)
+		formspec = get_charger_active_formspec(item_percent)
 		-- make sure timer restarts automatically
 		result = true
 	end
@@ -246,12 +242,24 @@ minetest.register_node("mars:solar_charger", {
 
 
 -- batteries
-function battery_power()
-    power_level = 10
+function change_battery_power(power_level)
     image = "mars_battery_"..power_level..".png"
+	power = power_level
 end
 
-minetest.register_craftitem("mars:battery", {
+minetest.register_craftitem("mars:battery10", {
     description = "Mars Battery",
     inventory_image = "mars_battery_10.png"
+})
+
+minetest.register_craftitem("mars:battery0", {
+    description = "Mars Battery",
+    inventory_image = "mars_battery_0.png"
+})
+
+minetest.register_craft({
+    type = "cooking",
+    output = "mars:battery10",
+    recipe = "mars:battery0",
+    cooktime = 5,
 })
