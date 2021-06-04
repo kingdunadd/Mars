@@ -1,0 +1,1 @@
+minetest.register_on_newplayer(function(ObjectRef))

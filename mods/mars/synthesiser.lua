@@ -273,7 +273,7 @@ minetest.register_craft({
 	output = "mars:synthesiser",
 	recipe = {
 		{"group:stone", "group:stone", "group:stone"},
-		{"group:stone", "", "group:stone"},
+		{"group:stone", "mars:battery10", "group:stone"},
 		{"group:stone", "group:stone", "group:stone"},
 	}
 })

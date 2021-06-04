@@ -265,7 +265,7 @@ minetest.register_node("mars:air", {
     walkable     = false, -- Would make the player collide with the air node
     pointable    = false, -- You can't select the node
     diggable     = false, -- You can't dig the node
-    buildable_to = true,  -- Nodes can be replace this node.
+    buildable_to = true,  -- Nodes can replace this node.
                           -- (you can place a node and remove the air node
                           -- that used to be there)
     air_equivalent = true,
@@ -296,7 +296,7 @@ minetest.register_craft({
     output = "mars:light_panel 9",
     recipe = {
         {"mars:glass","mars:glass","mars:glass"},
-        {"mars:glass",  "mars:battery",  "mars:glass"},
+        {"mars:glass",  "mars:battery10",  "mars:glass"},
         {"mars:glass","mars:glass","mars:glass"}
     }
 })
