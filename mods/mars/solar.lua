@@ -13,7 +13,7 @@ end
 function get_charger_active_formspec(item_percent)
     return "size[8,8.5]"..
         "list[context;src;2.75,0.5;1,1;]"..
-        "image[3.75,1.5;1,1;mars_synthesiser_arrow.png^[lowpart:"..
+        "image[3.75,1.5;5,1;mars_synthesiser_arrow.png^[lowpart:"..
         (item_percent)..":mars_synthesiser_arrow.png^[transformR360]"..
         "list[context;dst;4.75,0.96;2,2;]"..
         "list[current_player;main;0,4.25;8,1;]"..

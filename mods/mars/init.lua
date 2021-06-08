@@ -162,6 +162,16 @@ minetest.register_node("mars:steel_block", {
 })
 
 minetest.register_craft({
+    type = "shaped",
+    output = "mars:steel_block 9",
+    recipe = {
+        {"mars:steel_ingot", "mars:steel_ingot", "mars:steel_ingot"},
+        {"mars:steel_ingot", "mars:steel_ingot", "mars:steel_ingot"},
+        {"mars:steel_ingot", "mars:steel_ingot", "mars:steel_ingot"}
+    }
+})
+
+minetest.register_craft({
     type = "cooking",
     output = "mars:steel_ingot",
     recipe = "mars:iron_ore",

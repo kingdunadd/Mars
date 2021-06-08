@@ -140,15 +140,11 @@ local function furnace_node_timer(pos, elapsed)
 						dst_full = true
 					end
 				else
-					-- Item could not be cooked: probably missing fuel
+					-- Item could not be cooked
 					update = true
 				end
 			else
-				-- Furnace ran out of fuel
-				if cookable then
-					-- no fuel needed
-				else
-					-- We don't need to get new fuel since there is no cookable item
+				if not cookable then
 					src_time = 0
 				end
 			end

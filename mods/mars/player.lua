@@ -34,9 +34,9 @@ minetest.register_on_joinplayer(function(player)
         })
         player:set_sky({
             base_color = "#e1d4a4",
-            type = "regular",
+            type = "plain",
             clouds = false,
-            sky_color = {"#e1d4a4"}
+            --sky_color = {"#e1d4a4"}
         })
     end
 end)
