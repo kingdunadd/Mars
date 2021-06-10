@@ -289,7 +289,7 @@ minetest.register_node("mars:light_panel", {
     description = "Mars Light Panel",
     drawtype = "nodebox",
     tiles = {"mars_light_panel.png"},
-    inventory_image = {"mars_light_panel_front.png"},
+    inventory_image = "mars_light_panel_front.png",
     light_source = 15,
     groups = {cracky=2},
     paramtype2 = "wallmounted",

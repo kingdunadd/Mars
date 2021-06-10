@@ -15,7 +15,7 @@ local tabs = {}
 local progressive_mode = core.settings:get_bool "i3_progressive_mode"
 local damage_enabled = core.settings:get_bool "enable_damage"
 
-local __3darmor, __skinsdb, __awards
+local __awards
 local sfinv, unified_inventory, old_unified_inventory_fn
 
 local http = core.request_http_api()
@@ -87,18 +87,10 @@ local HUD_TIMER_MAX = 1.5
 
 local MIN_FORMSPEC_VERSION = 4
 
-local META_SAVES = {"bag_size", "waypoints"}
+local META_SAVES = {"waypoints"}
 
-local BAG_SIZES = {
-	small  = INV_SIZE + 3,
-	medium = INV_SIZE + 6,
-	large  = INV_SIZE + 9,
-}
 
 local SUBCAT = {
-	"bag",
-	"armor",
-	"skins",
 	"awards",
 	"waypoints",
 }
@@ -129,10 +121,7 @@ local PNG = {
 	tab = "i3_tab.png",
 	tab_top = "i3_tab.png^\\[transformFY",
 	furnace_anim = "i3_furnace_anim.png",
-	bag = "i3_bag.png",
-	armor = "i3_armor.png",
 	awards = "i3_award.png",
-	skins = "i3_skin.png",
 	waypoints = "i3_waypoint.png",
 	teleport = "i3_teleport.png",
 	add = "i3_add.png",
@@ -152,10 +141,7 @@ local PNG = {
 	next_hover = "i3_next_hover.png",
 	tab_hover = "i3_tab_hover.png",
 	tab_hover_top = "i3_tab_hover.png^\\[transformFY",
-	bag_hover = "i3_bag_hover.png",
-	armor_hover = "i3_armor_hover.png",
 	awards_hover = "i3_award_hover.png",
-	skins_hover = "i3_skin_hover.png",
 	waypoints_hover = "i3_waypoint_hover.png",
 	teleport_hover = "i3_teleport.png^\\[brighten",
 	add_hover = "i3_add.png^\\[brighten",
@@ -197,7 +183,6 @@ local styles = sprintf([[
 	style[prev_usage;fgimg=%s;fgimg_hovered=%s]
 	style[next_usage;fgimg=%s;fgimg_hovered=%s]
 	style[waypoint_add;fgimg=%s;fgimg_hovered=%s;content_offset=0]
-	style[btn_bag,btn_armor,btn_skins;font=bold;font_size=18;content_offset=0;sound=i3_click]
 	style[craft_rcp,craft_usg;noclip=true;font_size=16;sound=i3_craft;
 	      bgimg=i3_btn9.png;bgimg_hovered=i3_btn9_hovered.png;
 	      bgimg_pressed=i3_btn9_pressed.png;bgimg_middle=4,6]
@@ -2088,57 +2073,11 @@ local function get_ctn_content(fs, data, player, yoffset, ctn_len, award_list, a
 	fs("box", 0, yextra + 0.45, ctn_len, 0.045, "#bababa50")
 	fs("box", (data.subcat - 1) * 1.18, yextra + 0.45, 1, 0.045, "#f9826c")
 
-	local function not_installed(modname)
-		fs("hypertext", 0, yextra + 0.9, ctn_len, 0.6, "not_installed",
-			fmt("<center><style color=#7bf font=mono>%s</style> not installed</center>", modname))
-	end
 
 	if data.subcat == 1 then
-		fs(fmt("list[detached:%s_backpack;main;0,%f;1,1;]", ESC(name), yextra + 0.7))
-
-		if not data.bag:get_stack("main", 1):is_empty() then
-			fs("hypertext", 1.2, yextra + 0.89, ctn_len - 1.9, 0.8, "bpk",
-				ES("The inventory is extended by @1 slots", BAG_SIZES[data.bag_size] - INV_SIZE))
-		end
-
+		yextra = yextra + 0.7
+		get_award_list(data, fs, ctn_len, yextra, award_list, awards_unlocked, award_list_nb)
 	elseif data.subcat == 2 then
-		if __3darmor then
-			fs(fmt("list[detached:%s_armor;armor;0,%f;3,2;]", ESC(name), yextra + 0.7))
-
-			local armor_def = armor.def[name]
-
-			fs("label", 3.65, yextra + 1.55, fmt("%s: %s", ES"Level", armor_def.level))
-			fs("label", 3.65, yextra + 2.05, fmt("%s: %s", ES"Heal", armor_def.heal))
-		else
-			not_installed("3d_armor")
-		end
-
-	elseif data.subcat == 3 then
-		if __skinsdb then
-			local _skins = skins.get_skinlist_for_player(name)
-			local sks = {}
-
-			for _, skin in ipairs(_skins) do
-				sks[#sks + 1] = skin.name
-			end
-
-			sks = concat(sks, ","):gsub(";", "")
-
-			fs("label", 0, yextra + 0.85, fmt("%s:", ES"Select a skin"))
-			fs(fmt("dropdown[0,%f;4,0.6;skins;%s;%u;true]", yextra + 1.1, sks, data.skin_id or 1))
-		else
-			not_installed("skinsdb")
-		end
-
-	elseif data.subcat == 4 then
-		if __awards then
-			yextra = yextra + 0.7
-			get_award_list(data, fs, ctn_len, yextra, award_list, awards_unlocked, award_list_nb)
-		else
-			not_installed("awards")
-		end
-
-	elseif data.subcat == 5 then
 		get_waypoint_fs(fs, data, name, yextra, ctn_len)
 	end
 end
@@ -2468,7 +2407,6 @@ end
 local function get_inv_slots(data, fs)
 	local inv_x, inv_y = 0.22, 6.9
 	local width, size, spacing = HOTBAR_COUNT, 1, 0.1
-	local bag = data.bag_size
 
 	fs("style_type[box;colors=#77777710,#77777710,#777,#777]")
 
@@ -2479,19 +2417,19 @@ local function get_inv_slots(data, fs)
 	fs(fmt("style_type[list;size=%f;spacing=%f]", size, spacing),
 	   fmt("list[current_player;main;%f,%f;%u,1;]", inv_x, inv_y, HOTBAR_COUNT))
 
-	if bag then
-		if bag == "small" then
-			width, size = 10, 0.892
-		elseif bag == "medium" then
-			width, size = 11, 0.8
-		elseif bag == "large" then
-			width, size = 12, 0.726
-		end
-	end
+	-- if bag then
+	-- 	if bag == "small" then
+	-- 		width, size = 10, 0.892
+	-- 	elseif bag == "medium" then
+	-- 		width, size = 11, 0.8
+	-- 	elseif bag == "large" then
+	-- 		width, size = 12, 0.726
+	-- 	end
+	-- end
 
 	fs(fmt("style_type[list;size=%f;spacing=%f]", size, spacing),
 	   fmt("list[current_player;main;%f,%f;%u,%u;%u]", inv_x, inv_y + 1.15,
-		width, (bag and BAG_SIZES[data.bag_size] or INV_SIZE) / width, HOTBAR_COUNT),
+		width, INV_SIZE / width, HOTBAR_COUNT),
 	   "style_type[list;size=1;spacing=0.15]")
 
 	fs("listring[current_player;craft]listring[current_player;main]")
@@ -2510,7 +2448,6 @@ local function get_inventory_fs(player, data, fs)
 
 	if props.mesh ~= "" then
 		local anim = player:get_local_animation()
-		local armor_skin = __3darmor or __skinsdb
 		local t = {}
 
 		for _, v in ipairs(props.textures) do
@@ -2532,14 +2469,14 @@ local function get_inventory_fs(player, data, fs)
 	local awards_unlocked = 0
 	local max_val = 12
 
-	if __3darmor and data.subcat == 2 then
-		if data.scrbar_inv >= max_val then
-			data.scrbar_inv = data.scrbar_inv + 10
-		end
+	-- if __3darmor and data.subcat == 2 then
+	-- 	if data.scrbar_inv >= max_val then
+	-- 		data.scrbar_inv = data.scrbar_inv + 10
+	-- 	end
 
 		max_val = max_val + 10
 
-	elseif __awards and data.subcat == 4 then
+	if __awards and data.subcat == 1 then
 		award_list = awards.get_award_states(name)
 		award_list_nb = #award_list
 
@@ -2553,7 +2490,7 @@ local function get_inventory_fs(player, data, fs)
 
 		max_val = max_val + (award_list_nb * 13)
 
-	elseif data.subcat == 5 then
+	elseif data.subcat == 2 then
 		local wp_nb = #data.waypoints
 
 		if wp_nb > 0 then
@@ -2601,12 +2538,6 @@ i3.new_tab {
 	fields = function(player, data, fields)
 		local name = player:get_player_name()
 		local sb_inv = fields.scrbar_inv
-
-		if fields.skins and data.skin_id ~= tonum(fields.skins) then
-			data.skin_id = tonum(fields.skins)
-			local _skins = skins.get_skinlist_for_player(name)
-			skins.set_player_skin(player, _skins[data.skin_id])
-		end
 
 		for field in pairs(fields) do
 			if sub(field, 1, 4) == "btn_" then
@@ -2737,11 +2668,6 @@ end)
 if rawget(_G, "armor") then
 	__3darmor = true
 	armor:register_on_update(set_fs)
-end
-
-if rawget(_G, "skins") then
-	__skinsdb = true
-	insert(META_SAVES, "skin_id")
 end
 
 if rawget(_G, "awards") then
@@ -2964,56 +2890,6 @@ on_mods_loaded(function()
 	end
 end)
 
-local function init_backpack(player)
-	local name = player:get_player_name()
-	local data = pdata[name]
-	local inv = player:get_inventory()
-
-	inv:set_size("main", INV_SIZE)
-
-	data.bag = create_inventory(fmt("%s_backpack", name), {
-		allow_put = function(_inv, listname, _, stack)
-			local empty = _inv:get_stack(listname, 1):is_empty()
-
-			if empty and sub(stack:get_name(), 1, 7) == "i3:bag_" then
-				return 1
-			end
-
-			msg(name, ES"This is not a backpack")
-
-			return 0
-		end,
-
-		on_put = function(_, _, _, stack)
-			data.bag_size = match(stack:get_name(), "_(%w+)$")
-			inv:set_size("main", BAG_SIZES[data.bag_size])
-			set_fs(player)
-		end,
-
-		on_take = function()
-			for i = INV_SIZE + 1, BAG_SIZES[data.bag_size] do
-				local stack = inv:get_stack("main", i)
-
-				if not stack:is_empty() then
-					spawn_item(player, stack)
-				end
-			end
-
-			data.bag_size = nil
-			inv:set_size("main", INV_SIZE)
-
-			set_fs(player)
-		end,
-	})
-
-	data.bag:set_size("main", 1)
-
-	if data.bag_size then
-		data.bag:set_stack("main", 1, fmt("i3:bag_%s", data.bag_size))
-		inv:set_size("main", BAG_SIZES[data.bag_size])
-	end
-end
-
 local function init_waypoints(player)
 	local name = player:get_player_name()
 	local data = pdata[name]
@@ -3056,7 +2932,6 @@ on_joinplayer(function(player)
 	end
 
 	init_data(player, info)
-	init_backpack(player)
 	init_waypoints(player)
 
 	after(0, function()
@@ -3069,9 +2944,6 @@ core.register_on_dieplayer(function(player)
 	local name = player:get_player_name()
 	local data = pdata[name]
 	if not data then return end
-
-	data.bag_size = nil
-	data.bag:set_list("main", {})
 
 	local inv = player:get_inventory()
 	inv:set_size("main", INV_SIZE)
@@ -3361,34 +3233,3 @@ if progressive_mode then
 	table_merge(META_SAVES, {"inv_items", "known_recipes"})
 end
 
--- local bag_recipes = {
--- 	small = {
--- 		{"", "farming:string", ""},
--- 		{"group:wool", "group:wool", "group:wool"},
--- 		{"group:wool", "group:wool", "group:wool"},
--- 	},
--- 	medium = {
--- 		{"farming:string", "i3:bag_small", "farming:string"},
--- 		{"farming:string", "i3:bag_small", "farming:string"},
--- 	},
--- 	large = {
--- 		{"farming:string", "i3:bag_medium", "farming:string"},
--- 		{"farming:string", "i3:bag_medium", "farming:string"},
--- 	},
--- }
-
--- for size, rcp in pairs(bag_recipes) do
--- 	local bagname = fmt("i3:bag_%s", size)
-
--- 	core.register_craftitem(bagname, {
--- 		description = fmt("%s Backpack", size:gsub("^%l", upper)),
--- 		inventory_image = fmt("i3_bag_%s.png", size),
--- 		stack_max = 1,
--- 	})
-
--- 	core.register_craft {output = bagname, recipe = rcp}
--- 	core.register_craft {type = "fuel", recipe = bagname, burntime = 3}
--- end
-
---dofile(core.get_modpath("i3") .. "/test_tabs.lua")
---dofile(core.get_modpath("i3") .. "/test_custom_recipes.lua")

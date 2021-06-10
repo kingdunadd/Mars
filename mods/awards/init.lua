@@ -21,7 +21,7 @@ dofile(minetest.get_modpath("awards").."/src/triggers.lua")
 
 -- Optionally add default awards.
 if minetest.settings:get_bool("awards.add_defaults", true) then
-	dofile(minetest.get_modpath("awards").."/src/awards.lua")
+	dofile(minetest.get_modpath("awards").."/src/mars_awards.lua")
 end
 
 awards.load()
