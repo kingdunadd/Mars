@@ -238,6 +238,14 @@ minetest.register_craft({
     }
 })
 
+-- smiley
+minetest.register_node("mars:smiley", {
+	description = "Mars smiley",
+	tiles = {"smiley.png"},
+	is_ground_content = true,
+	groups = {cracky=2, stone=1}
+})
+
 -- sand
 minetest.register_node("mars:sand", {
 	description = "Mars Sand",
@@ -310,6 +318,32 @@ minetest.register_craft({
         {"mars:glass","mars:glass","mars:glass"}
     }
 })
+
+-- ladder
+
+minetest.register_node("mars:ladder_steel", {
+	description = "Mars Steel Ladder",
+	drawtype = "signlike",
+	tiles = {"mars_ladder_steel.png"},
+	-- inventory_image = ".png",
+	-- wield_image = ".png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	sunlight_propagates = true,
+	walkable = false,
+	climbable = true,
+	is_ground_content = false,
+	selection_box = {
+		type = "wallmounted",
+		--wall_top = = <default>
+		--wall_bottom = = <default>
+		--wall_side = = <default>
+	},
+	groups = {choppy = 2, oddly_breakable_by_hand = 3},
+	legacy_wallmounted = true,
+	--sounds = default.node_sound_wood_defaults(),
+})
+
 
 -- -- load other files
 local path = minetest.get_modpath("mars")
