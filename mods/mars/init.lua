@@ -1,4 +1,46 @@
 
+-- The hand
+-- Override the hand item registered in the engine in builtin/game/register.lua
+minetest.override_item("", {
+	wield_scale = {x=1,y=1,z=2.5},
+	tool_capabilities = {
+		full_punch_interval = 0.9,
+		max_drop_level = 0,
+		groupcaps = {
+			crumbly = {times={[2]=3.00, [3]=0.70}, uses=0, maxlevel=1},
+			snappy = {times={[3]=0.40}, uses=0, maxlevel=1},
+			oddly_breakable_by_hand = {times={[1]=3.50,[2]=2.00,[3]=0.70}, uses=0}
+		},
+		damage_groups = {fleshy=1},
+	}
+})
+
+
+-- drill
+minetest.register_tool("mars:drill_steel", {
+    description = "Mars Steel Drill",
+    inventory_image = "mars_steel_drill.png",
+    tool_capabilities = {
+            full_punch_interval = 0.8,
+            max_drop_level=1,
+            groupcaps={
+                cracky = {times={[1]=2.00, [2]=0.30, [3]=0.20}, uses=20, maxlevel=2},
+            },
+            damage_groups = {fleshy=4},
+        },
+        groups = {pickaxe = 1}
+})
+
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:pickaxe_stone",
+    recipe = {
+        {"",                  "mars:steel_ingot", ""},
+        {"mars:steel_ingot",  "mars:battery",     "mars:steel_ingot"},
+        {"mars:steel_rod",    "mars:steel_rod",   ""}
+    }
+})
+
 
 -- pickaxes
 minetest.register_tool("mars:pickaxe_stone", {
@@ -21,19 +63,9 @@ minetest.register_craft({
     type = "shaped",
     output = "mars:pickaxe_stone",
     recipe = {
-        {"mars:stone", "mars:stone",      "mars:stone"},
+        {"group:stone", "group:stone",      "group:stone"},
         {"",           "mars:steel_rod",  ""},
         {"",           "mars:steel_rod",  ""}
-    }
-})
-
-minetest.register_craft({
-    type = "shaped",
-    output = "mars:pickaxe_stone",
-    recipe = {
-        {"mars:cobblestone", "mars:cobblestone",     "mars:cobblestone"},
-        {"",                 "mars:steel_rod",       ""},
-        {"",                 "mars:steel_rod",       ""}
     }
 })
 
@@ -83,17 +115,7 @@ minetest.register_craft({
     type = "shaped",
     output = "mars:shovel_stone",
     recipe = {
-        {"", "mars:stone",      ""},
-        {"", "mars:steel_rod",  ""},
-        {"", "mars:steel_rod",  ""}
-    }
-})
-
-minetest.register_craft({
-    type = "shaped",
-    output = "mars:shovel_stone",
-    recipe = {
-        {"", "mars:cobblestone",      ""},
+        {"", "group:stone",      ""},
         {"", "mars:steel_rod",  ""},
         {"", "mars:steel_rod",  ""}
     }
@@ -320,13 +342,12 @@ minetest.register_craft({
 })
 
 -- ladder
-
 minetest.register_node("mars:ladder_steel", {
 	description = "Mars Steel Ladder",
 	drawtype = "signlike",
 	tiles = {"mars_ladder_steel.png"},
-	-- inventory_image = ".png",
-	-- wield_image = ".png",
+	inventory_image = "mars_ladder_steel.png",
+	wield_image = "mars_ladder_steel.png",
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
@@ -339,7 +360,7 @@ minetest.register_node("mars:ladder_steel", {
 		--wall_bottom = = <default>
 		--wall_side = = <default>
 	},
-	groups = {choppy = 2, oddly_breakable_by_hand = 3},
+	groups = {cracky = 2, oddly_breakable_by_hand = 3},
 	legacy_wallmounted = true,
 	--sounds = default.node_sound_wood_defaults(),
 })
