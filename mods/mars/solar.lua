@@ -240,26 +240,3 @@ minetest.register_node("mars:solar_charger", {
 	allow_metadata_inventory_take = allow_metadata_inventory_take,
 })
 
-
--- batteries
-function change_battery_power(power_level)
-    image = "mars_battery_"..power_level..".png"
-	power = power_level
-end
-
-minetest.register_craftitem("mars:battery10", {
-    description = "Mars Battery",
-    inventory_image = "mars_battery_10.png"
-})
-
-minetest.register_craftitem("mars:battery0", {
-    description = "Mars Battery",
-    inventory_image = "mars_battery_0.png"
-})
-
-minetest.register_craft({
-    type = "cooking",
-    output = "mars:battery10",
-    recipe = "mars:battery0",
-    cooktime = 5,
-})

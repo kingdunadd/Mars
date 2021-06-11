@@ -307,6 +307,48 @@ minetest.register_craft({
     cooktime = 5,
 })
 
+
+-- batteries
+minetest.register_node("mars:battery_full", {
+	description = "Mars Battery (charged)",
+    tiles = {
+        "mars_battery_top.png",   -- y+
+        "mars_battery_bottom.png",   -- y-
+        "mars_battery_full_side.png",  -- x+
+        "mars_battery_full_side.png",  -- x-
+        "mars_battery_full_side.png",  -- z+
+        "mars_battery_full_side.png", -- z-
+        },
+    light_source = 5,
+	inventory_image = "mars_battery_10.png",
+    wield_image = "mars_battery_10.png",
+	groups = {cracky = 2, oddly_breakable_by_hand = 3}
+})
+
+minetest.register_node("mars:battery_empty", {
+	description = "Mars Battery (empty)",
+    tiles = {
+        "mars_battery_top.png",   -- y+
+        "mars_battery_bottom.png",   -- y-
+        "mars_battery_empty_side.png",  -- x+
+        "mars_battery_empty_side.png",  -- x-
+        "mars_battery_empty_side.png",  -- z+
+        "mars_battery_empty_side.png", -- z-
+        },
+    light_source = 5,
+	inventory_image = "mars_battery_0.png",
+    wield_image = "mars_battery_0.png",
+	groups = {cracky = 2, oddly_breakable_by_hand = 3}
+})
+
+minetest.register_craft({
+    type = "cooking",
+    output = "mars:battery_full",
+    recipe = "mars:battery_empty",
+    cooktime = 5,
+})
+
+
 minetest.register_node("mars:air", {
     description = "Mars Air (how are you seeing this?!)",
     drawtype = "airlike",
