@@ -1,5 +1,5 @@
 
-local start_items = {["mars:pickaxe_steel"] = 1, ["mars:synthesiser"] = 1, ["mars:solar_charger"] = 1, ["mars:battery10"] = 10}
+local start_items = {["mars:pickaxe_steel"] = 1, ["mars:synthesiser"] = 1, ["mars:solar_charger"] = 1, ["mars:battery_full"] = 10}
 
 
 minetest.register_on_newplayer(function(player)

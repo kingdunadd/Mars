@@ -37,7 +37,7 @@ minetest.register_craft({
     output = "mars:drill_steel",
     recipe = {
         {"",                  "mars:steel_ingot", ""},
-        {"mars:steel_ingot",  "mars:battery10",     "mars:steel_ingot"},
+        {"mars:steel_ingot",  "mars:battery_full",     "mars:steel_ingot"},
         {"",    "mars:steel_rod",   ""}
     }
 })
@@ -388,7 +388,7 @@ minetest.register_craft({
     output = "mars:light_panel 9",
     recipe = {
         {"mars:glass","mars:glass","mars:glass"},
-        {"mars:glass",  "mars:battery10",  "mars:glass"},
+        {"mars:glass",  "mars:battery_full",  "mars:glass"},
         {"mars:glass","mars:glass","mars:glass"}
     }
 })
