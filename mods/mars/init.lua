@@ -48,16 +48,15 @@ minetest.register_tool("mars:pickaxe_stone", {
     description = "Mars Stone Pickaxe",
     inventory_image = "mars_stone_pickaxe.png",
     tool_capabilities = {
-        tool_capabilities = {
             full_punch_interval = 1.3,
             max_drop_level = 0,
             groupcaps={
                 cracky = {times={[2]=2.0, [3]=1.00}, uses=20, maxlevel=1},
+                crumbly = {times={[2]=5.00, [3]=2.0}, uses=10, maxlevel=1},
             },
             damage_groups = {fleshy=3},
         },
         groups = {pickaxe = 1}
-    }
 })
 
 minetest.register_craft({
@@ -79,6 +78,7 @@ minetest.register_tool("mars:pickaxe_steel", {
 		max_drop_level=1,
 		groupcaps={
 			cracky = {times={[1]=4.00, [2]=1.60, [3]=0.80}, uses=20, maxlevel=2},
+            crumbly = {times={[2]=4.00, [3]=2.0}, uses=10, maxlevel=1},
 		},
 		damage_groups = {fleshy=4},
 	},
@@ -319,7 +319,7 @@ minetest.register_node("mars:battery_full", {
         "mars_battery_full_side.png",  -- z+
         "mars_battery_full_side.png", -- z-
         },
-    light_source = 5,
+    light_source = 4,
 	inventory_image = "mars_battery_10.png",
     wield_image = "mars_battery_10.png",
 	groups = {cracky = 2, oddly_breakable_by_hand = 3}
@@ -335,7 +335,7 @@ minetest.register_node("mars:battery_empty", {
         "mars_battery_empty_side.png",  -- z+
         "mars_battery_empty_side.png", -- z-
         },
-    light_source = 5,
+    light_source = 4,
 	inventory_image = "mars_battery_0.png",
     wield_image = "mars_battery_0.png",
 	groups = {cracky = 2, oddly_breakable_by_hand = 3}
@@ -408,9 +408,6 @@ minetest.register_node("mars:ladder_steel", {
 	is_ground_content = false,
 	selection_box = {
 		type = "wallmounted",
-		--wall_top = = <default>
-		--wall_bottom = = <default>
-		--wall_side = = <default>
 	},
 	groups = {cracky = 2, oddly_breakable_by_hand = 3},
 	legacy_wallmounted = true,
