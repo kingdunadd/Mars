@@ -33,7 +33,7 @@ minetest.register_on_joinplayer(function(player)
             gravity = 0.38, -- mars gravity is 3.711ms-1 or approx 38% of earth
         })
         player:set_sky({
-            base_color = "#e1d4a4",
+            base_color = "#e4cd72",
             type = "plain",
             clouds = false,
             --sky_color = {"#e1d4a4"}

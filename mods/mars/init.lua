@@ -24,7 +24,8 @@ minetest.register_tool("mars:drill_steel", {
             full_punch_interval = 0.8,
             max_drop_level=1,
             groupcaps={
-                cracky = {times={[1]=2.00, [2]=0.30, [3]=0.20}, uses=20, maxlevel=2},
+                cracky = {times={[1]=2.00, [2]=0.30, [3]=0.20}, uses=30, maxlevel=2},
+                crumbly = {times={[1]=2.00, [2]=0.30, [3]=0.20}, uses=30, maxlevel=2}
             },
             damage_groups = {fleshy=4},
         },
@@ -33,11 +34,11 @@ minetest.register_tool("mars:drill_steel", {
 
 minetest.register_craft({
     type = "shaped",
-    output = "mars:pickaxe_stone",
+    output = "mars:drill_steel",
     recipe = {
         {"",                  "mars:steel_ingot", ""},
-        {"mars:steel_ingot",  "mars:battery",     "mars:steel_ingot"},
-        {"mars:steel_rod",    "mars:steel_rod",   ""}
+        {"mars:steel_ingot",  "mars:battery10",     "mars:steel_ingot"},
+        {"",    "mars:steel_rod",   ""}
     }
 })
 
@@ -225,6 +226,16 @@ minetest.register_node("mars:stone", {
 })
 
 
+-- sandy stone
+minetest.register_node("mars:sandy_stone", {
+	description = "Mars Sandy Stone",
+	tiles = {"mars_sandy_stone.png"},
+	is_ground_content = true,
+	groups = {cracky=2, crumbly=2},
+    drop = "mars:sand"
+})
+
+
 -- cobblestone
 
 minetest.register_node("mars:cobblestone", {
@@ -264,7 +275,6 @@ minetest.register_craft({
 minetest.register_node("mars:smiley", {
 	description = "Mars smiley",
 	tiles = {"smiley.png"},
-	is_ground_content = true,
 	groups = {cracky=2, stone=1}
 })
 

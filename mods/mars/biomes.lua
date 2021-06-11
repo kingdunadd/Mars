@@ -27,7 +27,7 @@ minetest.register_alias("mapgen_tree","mars:stone")
 
 
 minetest.register_biome({
-    name = "mars_surface",
+    name = "mars_surface_stone",
     node_top = "mars:stone",
     depth_top = 1,
     -- Node forming surface layer of biome and thickness of this layer
@@ -37,10 +37,7 @@ minetest.register_biome({
     node_stone = "mars:stone",
     -- Node that replaces all stone nodes between roughly y_min and y_max.
     node_water = "mars:sand",
-    -- Node that replaces all seawater nodes not in the surface layer
     node_river_water = "mars:sand",
-    -- Node that replaces river water in mapgens that use
-    -- default:river_water
     node_riverbed = "mars:sand",
     depth_riverbed = 2,
     -- Node placed under river water and thickness of this layer
@@ -107,7 +104,7 @@ minetest.register_ore({
     -- Omit from "scatter" ore for a uniform ore distribution.
     -- Omit from "stratum" ore for a simple horizontal strata from y_min to
     -- y_max.
-    biomes = {"mars_surface"},
+    biomes = {"mars_surface_stone"},
     -- List of biomes in which this ore occurs.
     -- Occurs in all biomes if this is omitted, and ignored if the Mapgen
     -- being used does not support biomes.
@@ -136,37 +133,4 @@ minetest.register_ore({
         persist = 0.7
     },
 
-})
-
-minetest.register_decoration({
-    deco_type = "simple",
-    place_on = {"mars:sand"},
-    sidelen = 16,
-    fill_ratio = 0.01,
-    biomes = {"mars_surface"},
-    y_max = 100,
-    y_min = -500,
-    decoration = "rocks:sand_flat",
-})
-
-minetest.register_decoration({
-    deco_type = "simple",
-    place_on = {"mars:stone"},
-    sidelen = 16,
-    fill_ratio = 0.04,
-    biomes = {"mars_surface"},
-    y_max = 500,
-    y_min = 1,
-    decoration = "rocks:stone_round",
-})
-
-minetest.register_decoration({
-    deco_type = "simple",
-    place_on = {"mars:stone"},
-    sidelen = 16,
-    fill_ratio = 0.03,
-    biomes = {"mars_surface"},
-    y_max = 500,
-    y_min = 1,
-    decoration = "rocks:stone_stub",
 })
