@@ -1,1 +1,1 @@
-minetest.register_on_newplayer(function(ObjectRef))
+-- minetest.register_on_newplayer(function(ObjectRef))

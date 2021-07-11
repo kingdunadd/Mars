@@ -19,7 +19,7 @@ dofile(minetest.get_modpath("awards").."/src/chat_commands.lua")
 dofile(minetest.get_modpath("awards").."/src/gui.lua")
 dofile(minetest.get_modpath("awards").."/src/triggers.lua")
 
--- Optionally add default awards.
+-- Optionally add mars awards.
 if minetest.settings:get_bool("awards.add_defaults", true) then
 	dofile(minetest.get_modpath("awards").."/src/mars_awards.lua")
 end
