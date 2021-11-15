@@ -240,3 +240,28 @@ minetest.register_node("mars:solar_charger", {
 	allow_metadata_inventory_take = allow_metadata_inventory_take,
 })
 
+
+minetest.register_node("mars:synthesiser_active", {
+    description = "Mars synthesiser",
+	tiles = {
+		"mars_solar_panel_active.png",   -- y+
+		"mars_solar_charger_active_side.png",   -- y-
+		"mars_solar_charger_active_side.png",  -- x+
+		"mars_solar_charger_active_side.png",  -- x-
+		"mars_solar_charger_active_side.png",  -- z+
+		"mars_solar_charger_active_side.png", -- z-
+		},
+	paramtype2 = "facedir",
+	light_source = 8,
+	drop = "mars:synthesiser",
+	groups = {cracky=2, not_in_creative_inventory=1},
+	legacy_facedir_simple = true,
+	is_ground_content = false,
+	on_timer = furnace_node_timer,
+
+	can_dig = can_dig,
+
+	allow_metadata_inventory_put = allow_metadata_inventory_put,
+	allow_metadata_inventory_move = allow_metadata_inventory_move,
+	allow_metadata_inventory_take = allow_metadata_inventory_take,
+})

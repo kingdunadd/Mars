@@ -452,9 +452,9 @@ doors.register("door_steel", {
 		-- sound_open = "doors_steel_door_open",
 		-- sound_close = "doors_steel_door_close",
 		recipe = {
-			{"group:steel", "group:steel"},
-			{"group:steel", "group:steel"},
-			{"group:steel", "group:steel"},
+			{"mars:glass", "mars:glass"},
+			{"mars:steel_ingot", "mars:steel_ingot"},
+			{"mars:steel_ingot", "mars:steel_ingot"},
 		}
 })
 
