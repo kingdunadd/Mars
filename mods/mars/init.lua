@@ -415,6 +415,16 @@ minetest.register_node("mars:ladder_steel", {
 })
 
 
+minetest.register_craft({
+    type = "shaped",
+    output = "mars:ladder_steel 8",
+    recipe = {
+        {"mars:steel_rod","","mars:steel_rod"},
+        {"mars:steel_rod","mars:steel_rod", "mars:steel_rod"},
+        {"mars:steel_rod","","mars:steel_rod"}
+    }
+})
+
 -- -- load other files
 local path = minetest.get_modpath("mars")
 
