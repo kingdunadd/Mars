@@ -8,8 +8,10 @@ Already Implemented
 - crafting objects
 - ore generation
 - synesthiser to create new objects
+- chests
 - placable batteries, drills and other tech
 - ladders and doors
+
 3rd-party mods
 - i3 inventory system
 - screwdriver
@@ -18,7 +20,7 @@ Already Implemented
 In Progress
 - solar charger (currently basically a furnace) 
 - fix the formspecs so they look nice and not weird
-- make chests work
+
 
 Todo
 - the player spawns in their crashed/landed spaceship
