@@ -216,12 +216,12 @@ end
 minetest.register_node("mars:synthesiser", {
     description = "Mars synthesiser",
     tiles = {
-        "mars_synthesiser_top.png",   -- y+
-        "mars_synthesiser_top.png",   -- y-
-        "mars_synthesiser_side.png",  -- x+
-        "mars_synthesiser_side.png",  -- x-
-        "mars_synthesiser_side.png",  -- z+
-        "mars_synthesiser_front.png", -- z-
+        "mars_synthesiser.png",   -- y+
+        "mars_synthesiser.png",   -- y-
+        "mars_synthesiser.png",  -- x+
+        "mars_synthesiser.png",  -- x-
+        "mars_synthesiser.png",  -- z+
+        "mars_synthesiser.png", -- z-
     },
 	paramtype2 = "facedir",
 	groups = {cracky=2},
@@ -278,12 +278,12 @@ minetest.register_craft({
 minetest.register_node("mars:synthesiser_active", {
     description = "Mars synthesiser",
     tiles = {
-        "mars_synthesiser_active_top.png",   -- y+
-        "mars_synthesiser_active_top.png",   -- y-
-        "mars_synthesiser_active_side.png",  -- x+
-        "mars_synthesiser_active_side.png",  -- x-
-        "mars_synthesiser_active_side.png",  -- z+
-        "mars_synthesiser_active_front.png", -- z-
+        "mars_synthesiser_active.png",   -- y+
+        "mars_synthesiser_active.png",   -- y-
+        "mars_synthesiser_active.png",  -- x+
+        "mars_synthesiser_active.png",  -- x-
+        "mars_synthesiser_active.png",  -- z+
+        "mars_synthesiser_active.png", -- z-
     },
 	paramtype2 = "facedir",
 	light_source = 8,
