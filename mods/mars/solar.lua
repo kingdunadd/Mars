@@ -241,8 +241,8 @@ minetest.register_node("mars:solar_charger", {
 })
 
 
-minetest.register_node("mars:synthesiser_active", {
-    description = "Mars synthesiser",
+minetest.register_node("mars:solar_charger_active", {
+    description = "Mars Solar Charger",
 	tiles = {
 		"mars_solar_panel_active.png",   -- y+
 		"mars_solar_charger_active_side.png",   -- y-
@@ -253,7 +253,7 @@ minetest.register_node("mars:synthesiser_active", {
 		},
 	paramtype2 = "facedir",
 	light_source = 8,
-	drop = "mars:synthesiser",
+	drop = "mars:solar_charger",
 	groups = {cracky=2, not_in_creative_inventory=1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,

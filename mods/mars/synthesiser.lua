@@ -214,7 +214,7 @@ end
 --
 
 minetest.register_node("mars:synthesiser", {
-    description = "Mars synthesiser",
+    description = "Mars Synthesiser",
     tiles = {
         "mars_synthesiser.png",   -- y+
         "mars_synthesiser.png",   -- y-
@@ -276,7 +276,7 @@ minetest.register_craft({
 
 
 minetest.register_node("mars:synthesiser_active", {
-    description = "Mars synthesiser",
+    description = "Mars Synthesiser",
     tiles = {
         "mars_synthesiser_active.png",   -- y+
         "mars_synthesiser_active.png",   -- y-
