@@ -15,9 +15,7 @@ Already Implemented
 - ladders and doors
 
 3rd-party mods
-- i3 inventory system
 - screwdriver
-- awards
 
 In Progress
 - solar charger (currently basically a furnace) 
