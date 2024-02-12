@@ -186,7 +186,7 @@ minetest.register_node("mars:steel_block", {
 
 minetest.register_craft({
     type = "shaped",
-    output = "mars:steel_block 9",
+    output = "mars:steel_block 4",
     recipe = {
         {"mars:steel_ingot", "mars:steel_ingot", "mars:steel_ingot"},
         {"mars:steel_ingot", "mars:steel_ingot", "mars:steel_ingot"},
@@ -350,7 +350,7 @@ minetest.register_craft({
 
 
 minetest.register_node("mars:air", {
-    description = "Mars Air (how are you seeing this?!)",
+    description = "Mars Air",
     drawtype = "airlike",
     paramtype = "light",
     sunlight_propagates = true,
@@ -385,7 +385,7 @@ minetest.register_node("mars:light_panel", {
 
 minetest.register_craft({
     type = "shaped",
-    output = "mars:light_panel 9",
+    output = "mars:light_panel 8",
     recipe = {
         {"mars:glass","mars:glass","mars:glass"},
         {"mars:glass",  "mars:battery_full",  "mars:glass"},

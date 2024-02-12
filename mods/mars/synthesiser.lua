@@ -118,36 +118,42 @@ local function furnace_node_timer(pos, elapsed)
 		-- Cooking
 		--
 
-		-- Check if we have cookable content
-		local aftercooked
-		cooked, aftercooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
-		cookable = cooked.time ~= 0
-		src_time = meta:get_float("src_time") or 0
+		--minetest.find_node_near(pos, radius, nodenames, [search_center])
+		-- only cook if next to a solar charger
+		local check_neighbour = minetest.find_node_near({x = pos.x, y = pos.y, z = pos.z}, 1, "mars:solar_charger")
+		if check_neighbour then
 
-		el = math.min(elapsed, cooked.time - src_time)
+			-- Check if we have cookable content
+			local aftercooked
+			cooked, aftercooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
+			cookable = cooked.time ~= 0
+			src_time = meta:get_float("src_time") or 0
 
-		-- If there is a cookable item then check if it is ready yet
-			if cookable then
-				src_time = src_time + el
-				if src_time >= cooked.time then
-					-- Place result in dst list if possible
-					if inv:room_for_item("dst", cooked.item) then
-						inv:add_item("dst", cooked.item)
-						inv:set_stack("src", 1, aftercooked.items[1])
-						src_time = src_time - cooked.time
-						update = true
+			el = math.min(elapsed, cooked.time - src_time)
+
+			-- If there is a cookable item then check if it is ready yet
+				if cookable then
+					src_time = src_time + el
+					if src_time >= cooked.time then
+						-- Place result in dst list if possible
+						if inv:room_for_item("dst", cooked.item) then
+							inv:add_item("dst", cooked.item)
+							inv:set_stack("src", 1, aftercooked.items[1])
+							src_time = src_time - cooked.time
+							update = true
+						else
+							dst_full = true
+						end
 					else
-						dst_full = true
+						-- Item could not be cooked
+						update = true
 					end
 				else
-					-- Item could not be cooked
-					update = true
+					if not cookable then
+						src_time = 0
+					end
 				end
-			else
-				if not cookable then
-					src_time = 0
-				end
-			end
+		end
 		elapsed = elapsed - el
 	end
 
@@ -162,15 +168,19 @@ local function furnace_node_timer(pos, elapsed)
 	local item_state
 	local item_percent = 0
 	if cookable then
-		item_percent = math.floor(src_time / cooked.time * 100)
-		if dst_full then
-			item_state = "100% (output full)"
+		if check_neighbour then
+			item_percent = math.floor(src_time / cooked.time * 100)
+			if dst_full then
+				item_state = "100% (output full)"
+			else
+				item_state = item_percent .. "%"
+			end
 		else
-			item_state = item_percent .. "%"
+			item_state = "No Charger Nearby"
 		end
 	else
 		if srclist and not srclist[1]:is_empty() then
-			item_state = "Not synthesisable"
+			item_state = "Not Synthesisable"
 		else
 			item_state = "Empty"
 		end
