@@ -168,15 +168,11 @@ local function furnace_node_timer(pos, elapsed)
 	local item_state
 	local item_percent = 0
 	if cookable then
-		if check_neighbour then
-			item_percent = math.floor(src_time / cooked.time * 100)
-			if dst_full then
-				item_state = "100% (output full)"
-			else
-				item_state = item_percent .. "%"
-			end
+		item_percent = math.floor(src_time / cooked.time * 100)
+		if dst_full then
+			item_state = "100% (output full)"
 		else
-			item_state = "No Charger Nearby"
+			item_state = item_percent .. "%"
 		end
 	else
 		if srclist and not srclist[1]:is_empty() then
@@ -205,7 +201,6 @@ local function furnace_node_timer(pos, elapsed)
 		result = true
 
 	end
-
 
 	local infotext = "Synethiser " .. active .. "\n(Item: " .. item_state .. ")"
 
@@ -296,7 +291,7 @@ minetest.register_node("mars:synthesiser_active", {
         "mars_synthesiser_active.png", -- z-
     },
 	paramtype2 = "facedir",
-	light_source = 8,
+	light_source = 4,
 	drop = "mars:synthesiser",
 	groups = {cracky=2, not_in_creative_inventory=1},
 	legacy_facedir_simple = true,

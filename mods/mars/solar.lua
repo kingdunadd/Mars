@@ -37,12 +37,12 @@ minetest.register_craft({
 	output = "mars:solar_charger",
 	recipe = {
 		{"mars:glass", "mars:glass", "mars:glass"},
-		{"mars:glass", "mars:battery_empty", "mars:glass"},
+		{"mars:glass", "mars:battery_full", "mars:glass"},
 		{"mars:steel_ingot", "mars:steel_ingot", "mars:steel_ingot"},
 	}
 })
 
-local function swap_node(pos, name)
+local function swap_nodes(pos, name)
 	local node = minetest.get_node(pos)
 	if node.name == name then
 		return
@@ -51,21 +51,21 @@ local function swap_node(pos, name)
 	minetest.swap_node(pos, node)
 end
 
--- detect if in light - modified from mesecons
+-- detect if in sunlight, and swap to active variant if so
 minetest.register_abm({
 	nodenames = {
 		"mars:solar_charger",
 		"mars:solar_charger_active"
 	},
-	interval = 1,
+	interval = 2,
 	chance = 1,
 	catch_up = false,
 	action = function(pos, node)
-		local light = minetest.get_node_light(pos)
-		if light >= 12 and node == "mars:solar_charger" then
-			minetest.swap_node(pos, node)
-		elseif light < 12 and node == "mars:solar_charger_active" then
-			minetest.swap_node(pos, node)
+		local light = minetest.get_natural_light({x = pos.x, y = pos.y+1, z=pos.z})
+		if light >= 10 and node.name == "mars:solar_charger" then
+			swap_nodes(pos, "mars:solar_charger_active")
+		elseif light < 10 and node.name == "mars:solar_charger_active" then
+			swap_nodes(pos, "mars:solar_charger")
 		end
 	end,
 })

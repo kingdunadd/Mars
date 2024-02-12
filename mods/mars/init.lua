@@ -304,7 +304,7 @@ minetest.register_craft({
     type = "cooking",
     output = "mars:glass",
     recipe = "mars:sand",
-    cooktime = 5,
+    cooktime = 4,
 })
 
 
